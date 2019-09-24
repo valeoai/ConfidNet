@@ -1,0 +1,48 @@
+# Data parameters
+data:
+    dataset: camvid
+    data_dir: /datasets_local/camvid/
+    input_size: [360, 480]
+    input_channels: 3
+    num_classes: 12
+    valid_size: 0.1
+
+# Training parameters
+training:
+    output_folder: /home/docker_user/shared/ccorbiere/logs/test/camvid_oddconfid
+    task: segmentation
+    learner: oodconfid
+    nb_epochs: 160
+    batch_size: 8
+    loss:
+        name: ood_confidence
+        half_random: True
+        beta: 0.3
+        lbda: 0.1
+        lbda_control: True
+    optimizer:
+        name: sgd
+        lr: 0.1
+        momentum: 0.9
+        weight_decay: 0.0001
+    lr_schedule:
+        name: multi_step
+        milestones: [80,120]
+        gamma: 0.1
+    metrics: ['accuracy', 'auc', 'ap_success', 'accuracy_success', 'ap_errors', 'accuracy_errors']
+    pin_memory: False
+    num_workers: 3
+    augmentations:
+        hflip: True
+        #rotate: 15
+        random_crop: 32
+        normalize: [[0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]]
+
+# Model parameters
+model:
+    name: segnet_oodconfid
+    resume:
+    is_deconv: True
+    is_batchnorm: True
+    is_dropout: True
+    feature_scale: 4

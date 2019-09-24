@@ -1,0 +1,41 @@
+# Data parameters
+data:
+    dataset: mnist
+    data_dir: data/mnist-data
+    input_size: [28,28]
+    input_channels: 1
+    num_classes: 10
+    valid_size: 0.1
+
+# Training parameters
+training:
+    output_folder: /share/DEEPLEARNING/ccorbiere/logs/cifar10/test/cifar10_trustscore_baseline_pretrained
+    task: classification
+    learner: default
+    nb_epochs: 100
+    batch_size: 128
+    loss:
+        name: cross_entropy
+    optimizer:
+        name: sgd
+        lr: 0.001
+        momentum: 0.9
+        weight_decay: 0.0001
+    lr_schedule:
+    smoother: 0.1
+    metrics: ['accuracy', 'auc', 'ap_success', 'ap_errors']
+    pin_memory: False
+    num_workers: 3
+    augmentations:
+        normalize: [[0.1307,], [0.3081,]]
+
+
+# Model parameters
+model:
+    name: mlp
+    resume:
+    hidden_size: 1000
+    is_dropout: True
+
+
+

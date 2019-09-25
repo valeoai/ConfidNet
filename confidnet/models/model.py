@@ -6,7 +6,7 @@ LOGGER = get_logger(__name__, level='DEBUG')
 
 class AbstractModel(nn.Module):
     def __init__(self, config_args, device):
-        super(AbstractModel, self).__init__()
+        super().__init__()
         self.device = device
         self.mc_dropout = config_args['training'].get('mc_dropout', None)
 
@@ -21,4 +21,3 @@ class AbstractModel(nn.Module):
     def print_summary(self, input_size):
         summary(self, input_size)
 
- 

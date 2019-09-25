@@ -12,7 +12,7 @@ LOGGER = get_logger(__name__, level='DEBUG')
 
 class SelfConfidLearner(AbstractLeaner):
     def __init__(self, config_args, train_loader, val_loader, test_loader, start_epoch, device):
-        super(SelfConfidLearner, self).__init__(config_args, train_loader, val_loader, test_loader, start_epoch, device)
+        super().__init__(config_args, train_loader, val_loader, test_loader, start_epoch, device)
         self.freeze_layers()
         self.disable_bn(verbose=True)
         if self.config_args['model'].get('uncertainty', None):
@@ -60,7 +60,7 @@ class SelfConfidLearner(AbstractLeaner):
             metrics.update(pred, target, confidence)
 
             # Update the average loss
-            loop.set_description('Epoch {}/{}'.format(epoch, self.nb_epochs))
+            loop.set_description(f'Epoch {epoch}/{self.nb_epochs}')
             loop.set_postfix(OrderedDict({'loss_confid': '{:05.3e}'.format(loss / float(len_data)),
                                           'acc': '{:05.2%}'.format(metrics.accuracy / float(len_steps))}))
             loop.update()
@@ -68,7 +68,7 @@ class SelfConfidLearner(AbstractLeaner):
         # Eval on epoch end        
         scores = metrics.get_scores(split='train')
         logs_dict = OrderedDict({'epoch': {'value':epoch,
-                                           'string': '{:03}'.format(epoch)},
+                                           'string': f'{epoch:03}'},
                                  'train/loss_confid': {'value': loss / float(len_data),
                                                        'string': '{:05.4e}'.format(loss / float(len_data))},
                                  })

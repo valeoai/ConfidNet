@@ -15,7 +15,7 @@ class conv2DBatchNormRelu(nn.Module):
         dilation=1,
         is_batchnorm=True,
     ):
-        super(conv2DBatchNormRelu, self).__init__()
+        super().__init__()
 
         conv_mod = nn.Conv2d(
             int(in_channels),
@@ -40,7 +40,7 @@ class conv2DBatchNormRelu(nn.Module):
 
 class segnetDown2(nn.Module):
     def __init__(self, in_size, out_size):
-        super(segnetDown2, self).__init__()
+        super().__init__()
         self.conv1 = conv2DBatchNormRelu(in_size, out_size, 3, 1, 1)
         self.conv2 = conv2DBatchNormRelu(out_size, out_size, 3, 1, 1)
         self.maxpool_with_argmax = nn.MaxPool2d(2, 2, return_indices=True)
@@ -55,7 +55,7 @@ class segnetDown2(nn.Module):
 
 class segnetDown3(nn.Module):
     def __init__(self, in_size, out_size):
-        super(segnetDown3, self).__init__()
+        super().__init__()
         self.conv1 = conv2DBatchNormRelu(in_size, out_size, 3, 1, 1)
         self.conv2 = conv2DBatchNormRelu(out_size, out_size, 3, 1, 1)
         self.conv3 = conv2DBatchNormRelu(out_size, out_size, 3, 1, 1)
@@ -72,7 +72,7 @@ class segnetDown3(nn.Module):
 
 class segnetUp2(nn.Module):
     def __init__(self, in_size, out_size):
-        super(segnetUp2, self).__init__()
+        super().__init__()
         self.unpool = nn.MaxUnpool2d(2, 2)
         self.conv1 = conv2DBatchNormRelu(in_size, in_size, 3, 1, 1)
         self.conv2 = conv2DBatchNormRelu(in_size, out_size, 3, 1, 1)
@@ -86,7 +86,7 @@ class segnetUp2(nn.Module):
 
 class segnetUp3(nn.Module):
     def __init__(self, in_size, out_size):
-        super(segnetUp3, self).__init__()
+        super().__init__()
         self.unpool = nn.MaxUnpool2d(2, 2)
         self.conv1 = conv2DBatchNormRelu(in_size, in_size, 3, 1, 1)
         self.conv2 = conv2DBatchNormRelu(in_size, in_size, 3, 1, 1)
@@ -101,7 +101,7 @@ class segnetUp3(nn.Module):
 
 class Segnet(AbstractModel):
     def __init__(self, config_args, device):
-        super(Segnet, self).__init__(config_args, device)
+        super().__init__(config_args, device)
         self.in_channels = config_args['data']['input_channels']
         self.n_classes = config_args['data']['num_classes']
         self.is_unpooling = True

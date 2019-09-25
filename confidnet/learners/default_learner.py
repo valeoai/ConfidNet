@@ -13,7 +13,7 @@ LOGGER = get_logger(__name__, level='DEBUG')
 
 class DefaultLearner(AbstractLeaner):
     def __init__(self, config_args, train_loader, val_loader, test_loader, start_epoch, device):
-        super(DefaultLearner, self).__init__(config_args, train_loader, val_loader, test_loader, start_epoch, device)
+        super().__init__(config_args, train_loader, val_loader, test_loader, start_epoch, device)
 
     def train(self, epoch):
         self.model.train()
@@ -45,7 +45,7 @@ class DefaultLearner(AbstractLeaner):
             metrics.update(pred, target, confidence)
 
             # Update the average loss
-            loop.set_description('Epoch {}/{}'.format(epoch, self.nb_epochs))
+            loop.set_description(f'Epoch {epoch}/{self.nb_epochs}')
             loop.set_postfix(OrderedDict({'loss_nll': '{:05.4e}'.format(loss / float(len_data)),
                                           'acc': '{:05.2%}'.format(metrics.accuracy / float(len_steps))}))
             loop.update()
@@ -53,7 +53,7 @@ class DefaultLearner(AbstractLeaner):
         # Eval on epoch end        
         scores = metrics.get_scores(split='train')
         logs_dict = OrderedDict({'epoch': {'value':epoch,
-                                           'string': '{:03}'.format(epoch)},
+                                           'string': f'{epoch:03}'},
                                  'lr': {'value': self.optimizer.param_groups[0]['lr'],
                                         'string': '{:05.1e}'.format(self.optimizer.param_groups[0]['lr'])},
                                  'train/loss_nll': {'value': loss / float(len_data),
@@ -105,7 +105,7 @@ class DefaultLearner(AbstractLeaner):
         # Special case of mc-dropout
         if mode == 'mc_dropout':
             self.model.keep_dropout_in_test()
-            LOGGER.info('Sampling {} times'.format(samples))
+            LOGGER.info(f'Sampling {samples} times')
 
         # Evaluation loop
         loop = tqdm(dloader, disable=not verbose)

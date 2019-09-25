@@ -5,7 +5,7 @@ from confidnet.models.small_convnet_svhn_selfconfid_classic import SmallConvNetS
 
 class SmallConvNetSVHNSelfConfidCloning(AbstractModel):
     def __init__(self, config_args, device):
-        super(SmallConvNetSVHNSelfConfidCloning, self).__init__(config_args, device)
+        super().__init__(config_args, device)
         self.pred_network = SmallConvNetSVHN(config_args, device)
 
         # Small trick to set num classes to 1

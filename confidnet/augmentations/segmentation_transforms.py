@@ -7,7 +7,7 @@ import torchvision.transforms.functional as tf
 from PIL import Image, ImageOps
 
 
-class Compose(object):
+class Compose:
     def __init__(self, transforms):
         self.transforms = transforms
         self.PIL2Numpy = False
@@ -28,7 +28,7 @@ class Compose(object):
         return img, mask
 
 
-class ToTensor(object):
+class ToTensor:
     def __call__(self, img, mask):
         """
         Args:
@@ -42,7 +42,7 @@ class ToTensor(object):
         return self.__class__.__name__ + '()'
 
 
-class Normalize(object):
+class Normalize:
     def __init__(self, mean, std, inplace=False):
         self.mean = mean
         self.std = std
@@ -52,7 +52,7 @@ class Normalize(object):
         return tf.normalize(img, self.mean, self.std, self.inplace), mask
 
 
-class RandomCrop(object):
+class RandomCrop:
     def __init__(self, size, padding=0):
         if isinstance(size, numbers.Number):
             self.size = (int(size), int(size))
@@ -78,7 +78,7 @@ class RandomCrop(object):
         return img.crop((x1, y1, x1 + tw, y1 + th)), mask.crop((x1, y1, x1 + tw, y1 + th))
 
 
-class AdjustGamma(object):
+class AdjustGamma:
     def __init__(self, gamma):
         self.gamma = gamma
 
@@ -87,7 +87,7 @@ class AdjustGamma(object):
         return tf.adjust_gamma(img, random.uniform(1, 1 + self.gamma)), mask
 
 
-class AdjustSaturation(object):
+class AdjustSaturation:
     def __init__(self, saturation):
         self.saturation = saturation
 
@@ -99,7 +99,7 @@ class AdjustSaturation(object):
         )
 
 
-class AdjustHue(object):
+class AdjustHue:
     def __init__(self, hue):
         self.hue = hue
 
@@ -108,7 +108,7 @@ class AdjustHue(object):
         return tf.adjust_hue(img, random.uniform(-self.hue, self.hue)), mask
 
 
-class AdjustBrightness(object):
+class AdjustBrightness:
     def __init__(self, bf):
         self.bf = bf
 
@@ -117,7 +117,7 @@ class AdjustBrightness(object):
         return tf.adjust_brightness(img, random.uniform(1 - self.bf, 1 + self.bf)), mask
 
 
-class AdjustContrast(object):
+class AdjustContrast:
     def __init__(self, cf):
         self.cf = cf
 
@@ -126,7 +126,7 @@ class AdjustContrast(object):
         return tf.adjust_contrast(img, random.uniform(1 - self.cf, 1 + self.cf)), mask
 
 
-class CenterCrop(object):
+class CenterCrop:
     def __init__(self, size):
         if isinstance(size, numbers.Number):
             self.size = (int(size), int(size))
@@ -142,7 +142,7 @@ class CenterCrop(object):
         return img.crop((x1, y1, x1 + tw, y1 + th)), mask.crop((x1, y1, x1 + tw, y1 + th))
 
 
-class RandomHorizontallyFlip(object):
+class RandomHorizontallyFlip:
     def __init__(self, p):
         self.p = p
 
@@ -152,7 +152,7 @@ class RandomHorizontallyFlip(object):
         return img, mask
 
 
-class RandomVerticallyFlip(object):
+class RandomVerticallyFlip:
     def __init__(self, p):
         self.p = p
 
@@ -162,7 +162,7 @@ class RandomVerticallyFlip(object):
         return img, mask
 
 
-class FreeScale(object):
+class FreeScale:
     def __init__(self, size):
         self.size = tuple(reversed(size))  # size: (h, w)
 
@@ -171,7 +171,7 @@ class FreeScale(object):
         return img.resize(self.size, Image.BILINEAR), mask.resize(self.size, Image.NEAREST)
 
 
-class RandomTranslate(object):
+class RandomTranslate:
     def __init__(self, offset):
         # tuple (delta_x, delta_y)
         self.offset = offset
@@ -221,7 +221,7 @@ class RandomTranslate(object):
         )
 
 
-class RandomRotate(object):
+class RandomRotate:
     def __init__(self, degree):
         self.degree = degree
 
@@ -249,7 +249,7 @@ class RandomRotate(object):
         )
 
 
-class Scale(object):
+class Scale:
     def __init__(self, size):
         self.size = size
 
@@ -268,7 +268,7 @@ class Scale(object):
             return img.resize((ow, oh), Image.BILINEAR), mask.resize((ow, oh), Image.NEAREST)
 
 
-class RandomSizedCrop(object):
+class RandomSizedCrop:
     def __init__(self, size):
         self.size = size
 
@@ -304,7 +304,7 @@ class RandomSizedCrop(object):
         return crop(*scale(img, mask))
 
 
-class RandomSized(object):
+class RandomSized:
     def __init__(self, size):
         self.size = size
         self.scale = Scale(self.size)

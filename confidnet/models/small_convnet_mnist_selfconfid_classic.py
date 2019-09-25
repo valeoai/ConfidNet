@@ -5,7 +5,7 @@ from confidnet.models.model import AbstractModel
 
 class SmallConvNetMNISTSelfConfidClassic(AbstractModel):
     def __init__(self, config_args, device):
-        super(SmallConvNetMNISTSelfConfidClassic, self).__init__(config_args, device)
+        super().__init__(config_args, device)
         self.conv1 = nn.Conv2d(config_args['data']['input_channels'], 32, 3)
         self.conv2 = nn.Conv2d(32, 64, 3)
         self.maxpool = nn.MaxPool2d(2)

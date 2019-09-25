@@ -1,6 +1,6 @@
-from confidnet.models import AbstractModel
-from confidnet.models import SmallConvNetSVHN
-from confidnet.models import SmallConvNetSVHNSelfConfidClassic
+from confidnet.models.model import AbstractModel
+from confidnet.models.small_convnet_svhn import SmallConvNetSVHN
+from confidnet.models.small_convnet_svhn_selfconfid_classic import SmallConvNetSVHNSelfConfidClassic
 
 
 class SmallConvNetSVHNSelfConfidCloning(AbstractModel):

@@ -9,9 +9,9 @@ from confidnet.loaders import get_loader
 from confidnet.learners import get_learner
 from confidnet.models import get_model
 from confidnet.utils import trust_scores
-from confidnet.utils import Metrics
-
-LOGGER = confidnet.utils.logger.get_logger(__name__, level='DEBUG')
+from confidnet.utils.metrics import Metrics
+from confidnet.utils.logger import get_logger
+LOGGER = get_logger(__name__, level='DEBUG')
 
 MODE_TYPE = ['normal', 'gt', 'mc_dropout', 'trust_score', 'self_confid']
 MAX_NUMBER_TRUSTSCORE_SEG = 3000

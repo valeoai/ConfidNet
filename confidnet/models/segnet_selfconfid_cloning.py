@@ -1,6 +1,6 @@
-from confidnet.models import AbstractModel
+from confidnet.models.model import AbstractModel
 from confidnet.models.segnet import Segnet
-from confidnet.models import SegnetSelfConfid
+from confidnet.models.segnet_selfconfid import SegnetSelfConfid
 
 class SegnetSelfConfidCloning(AbstractModel):
     def __init__(self, config_args, device):

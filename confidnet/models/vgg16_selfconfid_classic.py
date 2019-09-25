@@ -1,7 +1,7 @@
 import torch.nn as nn
 import torch.nn.functional as F
-from confidnet.models import AbstractModel
-from confidnet.models import Conv2dSame
+from confidnet.models.model import AbstractModel
+from confidnet.models.vgg16 import Conv2dSame
 
 class VGG16SelfConfidClassic(AbstractModel):
     def __init__(self, config_args, device):

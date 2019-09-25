@@ -3,8 +3,8 @@ import torch
 import numpy as np
 from torch.utils.data.sampler import SubsetRandomSampler
 from confidnet.augmentations import get_composed_augmentations
-
-LOGGER = confidnet.utils.logger.get_logger(__name__, level='DEBUG')
+from confidnet.utils.logger import get_logger
+LOGGER = get_logger(__name__, level='DEBUG')
 
 
 class AbstractDataLoader(object):    

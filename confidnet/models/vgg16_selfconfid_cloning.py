@@ -1,5 +1,5 @@
-from confidnet.models import AbstractModel
-from confidnet.models import VGG16
+from confidnet.models.model import AbstractModel
+from confidnet.models.vgg16 import VGG16
 from confidnet.models.vgg16_selfconfid_classic import VGG16SelfConfidClassic
 
 class VGG16SelfConfidCloning(AbstractModel):

@@ -1,6 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
-from confidnet.models import AbstractModel
+from confidnet.models.model import AbstractModel
 from torchvision import models
 
 class Conv2dSame(nn.Module):

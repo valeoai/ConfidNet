@@ -1,7 +1,7 @@
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
-from confidnet.models import AbstractModel
+from confidnet.models.model import AbstractModel
 
 class conv2DBatchNormRelu(nn.Module):
     def __init__(

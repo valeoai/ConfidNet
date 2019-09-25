@@ -4,10 +4,10 @@ import numpy as np
 from tqdm import tqdm
 from collections import OrderedDict
 from confidnet.learners.learner import AbstractLeaner
-from confidnet.utils import Metrics
+from confidnet.utils.metrics import Metrics
 from confidnet.utils import misc
-
-LOGGER = confidnet.utils.logger.get_logger(__name__, level='DEBUG')
+from confidnet.utils.logger import get_logger
+LOGGER = get_logger(__name__, level='DEBUG')
 
 
 class SelfConfidLearner(AbstractLeaner):

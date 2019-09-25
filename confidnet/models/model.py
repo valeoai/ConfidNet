@@ -1,7 +1,7 @@
 import torch.nn as nn
 from torchsummary import summary
-
-LOGGER = confidnet.utils.logger.get_logger(__name__, level='DEBUG')
+from confidnet.utils.logger import get_logger
+LOGGER = get_logger(__name__, level='DEBUG')
 
 
 class AbstractModel(nn.Module):

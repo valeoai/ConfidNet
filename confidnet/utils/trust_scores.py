@@ -4,8 +4,8 @@ from sklearn.neighbors import KDTree
 from sklearn.neighbors import KNeighborsClassifier
 import multiprocessing
 import time
-
-LOGGER = confidnet.utils.logger.get_logger(__name__, level='DEBUG')
+from confidnet.utils.logger import get_logger
+LOGGER = get_logger(__name__, level='DEBUG')
 
 class TrustScore:
     """

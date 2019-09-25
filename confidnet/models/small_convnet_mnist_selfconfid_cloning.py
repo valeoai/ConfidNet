@@ -1,5 +1,5 @@
-from confidnet.models import AbstractModel
-from confidnet.models import SmallConvNetMNIST
+from confidnet.models.model import AbstractModel
+from confidnet.models.small_convnet_mnist import SmallConvNetMNIST
 from confidnet.models.small_convnet_mnist_selfconfid_classic import SmallConvNetMNISTSelfConfidClassic
 
 class SmallConvNetMNISTSelfConfidCloning(AbstractModel):

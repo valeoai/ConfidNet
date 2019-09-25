@@ -1,34 +1,28 @@
-from confidnet.models import MLP
-from confidnet.models import MLPExtractor
-from confidnet.models import MLPSelfConfid
-from confidnet.models import MLPSelfConfidCloning
-from confidnet.models import MLPOODConfid
-from confidnet.models import SmallConvNetMNIST
+from confidnet.models.mlp import MLP
+from confidnet.models.mlp_extractor import MLPExtractor
+from confidnet.models.mlp_selfconfid import MLPSelfConfid
+from confidnet.models.mlp_selfconfid_cloning import MLPSelfConfidCloning
+from confidnet.models.mlp_oodconfid import MLPOODConfid
+from confidnet.models.small_convnet_mnist import SmallConvNetMNIST
 from confidnet.models.small_convnet_mnist_extractor import SmallConvNetMNISTExtractor
 from confidnet.models.small_convnet_mnist_selfconfid_classic import SmallConvNetMNISTSelfConfidClassic
-from confidnet.models import SmallConvNetMNISTSelfConfidCloning
-from confidnet.models import SmallConvNetMNISTOODConfid
-from confidnet.models import SmallConvNetSVHN
-from confidnet.models import SmallConvNetSVHNExtractor
-from confidnet.models import SmallConvNetSVHNSelfConfidClassic
-from confidnet.models import SmallConvNetSVHNSelfConfidCloning
-from confidnet.models.small_convnet_svhn_selfconfid_1layers import SmallConvNetSVHNSelfConfid1Layers
-from confidnet.models.small_convnet_svhn_selfconfid_2layers import SmallConvNetSVHNSelfConfid2Layers
-from confidnet.models.small_convnet_svhn_selfconfid_3layers import SmallConvNetSVHNSelfConfid3Layers
-from confidnet.models import SmallConvNetSVHNSelfConfid4Layers
-from confidnet.models import SmallConvNetSVHNSelfConfid6Layers
-from confidnet.models import SmallConvNetSVHNSelfConfid7Layers
+from confidnet.models.small_convnet_mnist_selfconfid_cloning import SmallConvNetMNISTSelfConfidCloning
+from confidnet.models.small_convnet_mnist_oodconfid import SmallConvNetMNISTOODConfid
+from confidnet.models.small_convnet_svhn import SmallConvNetSVHN
+from confidnet.models.small_convnet_svhn_extractor import SmallConvNetSVHNExtractor
+from confidnet.models.small_convnet_svhn_selfconfid_classic import SmallConvNetSVHNSelfConfidClassic
+from confidnet.models.small_convnet_svhn_selfconfid_cloning import SmallConvNetSVHNSelfConfidCloning
 from confidnet.models.small_convnet_svhn_oodconfid import SmallConvNetSVHNOODConfid
-from confidnet.models import VGG16
-from confidnet.models import VGG16Extractor
+from confidnet.models.vgg16 import VGG16
+from confidnet.models.vgg16_extractor import VGG16Extractor
 from confidnet.models.vgg16_selfconfid_classic import VGG16SelfConfidClassic
-from confidnet.models import VGG16SelfConfidCloning
-from confidnet.models import VGG16OODConfid
+from confidnet.models.vgg16_selfconfid_cloning import VGG16SelfConfidCloning
+from confidnet.models.vgg16_oodconfid import VGG16OODConfid
 from confidnet.models.segnet import Segnet
-from confidnet.models import SegnetExtractor
-from confidnet.models import SegnetSelfConfid
+from confidnet.models.segnet_extractor import SegnetExtractor
+from confidnet.models.segnet_selfconfid import SegnetSelfConfid
 from confidnet.models.segnet_selfconfid_cloning import SegnetSelfConfidCloning
-from confidnet.models import SegNetOODConfid
+from confidnet.models.segnet_oodconfid import SegNetOODConfid
 
 
 def get_model(config_args, device):
@@ -52,12 +46,6 @@ def get_model(config_args, device):
         'small_convnet_svhn_extractor': SmallConvNetSVHNExtractor,
         'small_convnet_svhn_selfconfid_classic': SmallConvNetSVHNSelfConfidClassic,
         'small_convnet_svhn_selfconfid_cloning': SmallConvNetSVHNSelfConfidCloning,
-        'small_convnet_svhn_selfconfid_1layers': SmallConvNetSVHNSelfConfid1Layers,
-        'small_convnet_svhn_selfconfid_2layers': SmallConvNetSVHNSelfConfid2Layers,
-        'small_convnet_svhn_selfconfid_3layers': SmallConvNetSVHNSelfConfid3Layers,
-        'small_convnet_svhn_selfconfid_4layers': SmallConvNetSVHNSelfConfid4Layers,
-        'small_convnet_svhn_selfconfid_6layers': SmallConvNetSVHNSelfConfid6Layers,
-        'small_convnet_svhn_selfconfid_7layers': SmallConvNetSVHNSelfConfid7Layers,
         "small_convnet_svhn_oodconfid": SmallConvNetSVHNOODConfid,
         'vgg16': VGG16,
         'vgg16_extractor': VGG16Extractor,

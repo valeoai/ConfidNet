@@ -1,7 +1,7 @@
 from torch.optim.lr_scheduler import MultiStepLR, ExponentialLR, CosineAnnealingLR
 from torch.optim.lr_scheduler import _LRScheduler
-
-LOGGER = confidnet.utils.logger.get_logger(__name__, level='DEBUG')
+from confidnet.utils.logger import get_logger
+LOGGER = get_logger(__name__, level='DEBUG')
 
 
 class ConstantLR(_LRScheduler):

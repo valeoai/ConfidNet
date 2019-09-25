@@ -3,9 +3,9 @@ import torch
 import torch.optim as optim
 from confidnet.utils import losses
 from confidnet.models import get_model
-from confidnet.utils import get_scheduler
-
-LOGGER = confidnet.utils.logger.get_logger(__name__, level='DEBUG')
+from confidnet.utils.schedulers import get_scheduler
+from confidnet.utils.logger import get_logger
+LOGGER = get_logger(__name__, level='DEBUG')
 
 
 class AbstractLeaner(object):

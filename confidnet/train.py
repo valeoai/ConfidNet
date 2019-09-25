@@ -7,9 +7,9 @@ import torch
 
 from confidnet.loaders import get_loader
 from confidnet.learners import get_learner
-from confidnet.utils import TensorboardLogger
-
-LOGGER = confidnet.utils.logger.get_logger(__name__, level='DEBUG')
+from confidnet.utils.tensorboard_logger import TensorboardLogger
+from confidnet.utils.logger import get_logger
+LOGGER = get_logger(__name__, level='DEBUG')
 
 
 def main():

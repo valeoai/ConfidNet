@@ -11,7 +11,7 @@ RUN conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
 RUN conda install -c menpo opencv
 RUN pip install tensorboardX scikit-image tqdm pyyaml easydict future
 
-COPY ./ ./ADVENT
-RUN pip install -e ./ADVENT
+COPY ./ ./ConfidNet
+RUN pip install -e ./ConfidNet
 
-WORKDIR ./ADVENT
+WORKDIR ./ConfidNet

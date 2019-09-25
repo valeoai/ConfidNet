@@ -2,10 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from confidnet.utils import misc
-try:
-    import structured_map_ranking_loss
-except Exception as e:
-    print(e)
+import structured_map_ranking_loss
 
 
 class SelfConfidMSELoss(nn.modules.loss._Loss):

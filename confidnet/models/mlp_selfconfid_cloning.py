@@ -1,0 +1,19 @@
+from confidnet.models import AbstractModel
+from confidnet.models import MLP
+from confidnet.models import MLPSelfConfid
+
+class MLPSelfConfidCloning(AbstractModel):
+    def __init__(self, config_args, device):
+        super(MLPSelfConfidCloning, self).__init__(config_args, device)
+        self.pred_network = MLP(config_args, device)
+
+        # Small trick to set num classes to 1
+        temp = config_args['data']['num_classes']
+        config_args['data']['num_classes'] = 1
+        self.uncertainty_network = MLPSelfConfid(config_args, device)
+        config_args['data']['num_classes'] = temp
+
+    def forward(self, x):
+        pred = self.pred_network(x)
+        _, uncertainty = self.uncertainty_network(x)
+        return pred, uncertainty

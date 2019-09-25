@@ -9,9 +9,11 @@ RUN conda config --set always_yes yes
 
 RUN conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
 RUN conda install -c menpo opencv
-RUN pip install tensorboardX scikit-image tqdm pyyaml easydict future
+RUN pip install tensorflow
 
 COPY ./ ./ConfidNet
 RUN pip install -e ./ConfidNet
 
 WORKDIR ./ConfidNet
+
+RUN python -c "import confidnet"

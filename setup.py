@@ -6,6 +6,6 @@ setup(name='ConfidNet',
       url='https://github.com/valeoai/ConfidNet',
       install_requires=['pyyaml', 'coloredlogs',
                         'torchsummary', 'verboselogs',
-                        'incense', 'future',
+                        'future',
                         'setuptools', 'tqdm'],
       packages=find_packages())

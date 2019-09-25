@@ -35,7 +35,7 @@ def get_composed_augmentations(aug_dict, verbose=True, training='classif'):
     elif training == 'segmentation':
         aug_type = SEGMENTATION_AUGMENTATION
     else:
-        raise Exception("Augmentation dict {} non existing".format(training))
+        raise Exception(f"Augmentation dict {training} non existing")
 
     if aug_dict is None:
         LOGGER.info('Using No Augmentations')
@@ -48,7 +48,7 @@ def get_composed_augmentations(aug_dict, verbose=True, training='classif'):
             continue
         augmentations.append(aug_type[aug_key](aug_param))
         if verbose:
-            LOGGER.info('Using {} aug with params {}'.format(aug_key, aug_param))
+            LOGGER.info(f'Using {aug_key} aug with params {aug_param}')
     augmentations.append(aug_type['to_tensor']())
     augmentations.extend(aug_after)
     return aug_type['compose'](augmentations)

@@ -7,7 +7,7 @@ from confidnet.loaders.camvid_dataset import CamvidDataset
 
 class MNISTLoader(AbstractDataLoader):
     def __init__(self, config_args):
-        super(MNISTLoader, self).__init__(config_args)
+        super().__init__(config_args)
 
     def load_dataset(self):
         self.train_dataset = datasets.MNIST(root=self.data_dir, train=True, download=True,
@@ -18,7 +18,7 @@ class MNISTLoader(AbstractDataLoader):
 
 class SVHNLoader(AbstractDataLoader):
     def __init__(self, config_args):
-        super(SVHNLoader, self).__init__(config_args)
+        super().__init__(config_args)
 
     def load_dataset(self):
         self.train_dataset = datasets.SVHN(root=self.data_dir, split='train', download=True,
@@ -29,7 +29,7 @@ class SVHNLoader(AbstractDataLoader):
 
 class CIFAR10Loader(AbstractDataLoader):  
     def __init__(self, config_args):
-        super(CIFAR10Loader, self).__init__(config_args)
+        super().__init__(config_args)
         
     def load_dataset(self):
         self.train_dataset = datasets.CIFAR10(root=self.data_dir, train=True, download=True,
@@ -40,7 +40,7 @@ class CIFAR10Loader(AbstractDataLoader):
 
 class CIFAR100Loader(AbstractDataLoader):
     def __init__(self, config_args):
-        super(CIFAR100Loader, self).__init__(config_args)
+        super().__init__(config_args)
         
     def load_dataset(self):
         self.train_dataset = datasets.CIFAR100(root=self.data_dir, train=True, download=True,
@@ -51,7 +51,7 @@ class CIFAR100Loader(AbstractDataLoader):
         
 class CamVidLoader(AbstractDataLoader):
     def __init__(self, config_args):
-        super(CamVidLoader, self).__init__(config_args)
+        super().__init__(config_args)
 
     def add_augmentations(self):
         self.augmentations_train = get_composed_augmentations(self.augmentations, training='segmentation')

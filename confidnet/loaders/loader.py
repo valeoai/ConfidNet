@@ -7,7 +7,7 @@ from confidnet.utils.logger import get_logger
 LOGGER = get_logger(__name__, level='DEBUG')
 
 
-class AbstractDataLoader(object):    
+class AbstractDataLoader:    
     def __init__(self, config_args):
         self.output_folder = config_args['training']['output_folder']
         self.data_dir = config_args['data']['data_dir']

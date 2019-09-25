@@ -8,7 +8,7 @@ from confidnet.utils.logger import get_logger
 LOGGER = get_logger(__name__, level='DEBUG')
 
 
-class AbstractLeaner(object):
+class AbstractLeaner:
 	def __init__(self, config_args, train_loader, val_loader, test_loader, start_epoch, device):
 		self.config_args = config_args
 		self.task = config_args['training']['task']
@@ -67,7 +67,7 @@ class AbstractLeaner(object):
 
 	def set_optimizer(self, optimizer_name):
 		optimizer_params = {k: v for k, v in self.config_args['training']['optimizer'].items() if k != 'name'}
-		LOGGER.info('Using optimizer {}'.format(optimizer_name))
+		LOGGER.info(f'Using optimizer {optimizer_name}')
 		if optimizer_name == 'sgd':
 			self.optimizer = optim.SGD(self.model.parameters(), **optimizer_params)
 		elif optimizer_name == 'adam':
@@ -90,7 +90,7 @@ class AbstractLeaner(object):
 			'model_state_dict': self.model.module.state_dict() if isinstance(self.model, torch.nn.DataParallel)
 			else self.model.state_dict(),
 			'optimizer_state_dict': self.optimizer.state_dict(),
-			}, os.path.join(self.output_folder, 'model_epoch_{:03d}.ckpt'.format(epoch)))
+			}, os.path.join(self.output_folder, f'model_epoch_{epoch:03d}.ckpt'))
 
 	def save_tb(self, logs_dict):
 		# ================================================================== #

@@ -4,7 +4,7 @@ from confidnet.models.model import AbstractModel
 
 class MLP(AbstractModel):
     def __init__(self, config_args, device):
-        super(MLP, self).__init__(config_args, device)
+        super().__init__(config_args, device)
         self.dropout = config_args['model']['is_dropout']
         self.fc1 = nn.Linear(config_args['data']['input_size'][0]*config_args['data']['input_size'][1], config_args['model']['hidden_size'])
         self.fc2 = nn.Linear(config_args['model']['hidden_size'], config_args['data']['num_classes'])

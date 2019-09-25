@@ -4,7 +4,7 @@ from confidnet.models.mlp_selfconfid import MLPSelfConfid
 
 class MLPSelfConfidCloning(AbstractModel):
     def __init__(self, config_args, device):
-        super(MLPSelfConfidCloning, self).__init__(config_args, device)
+        super().__init__(config_args, device)
         self.pred_network = MLP(config_args, device)
 
         # Small trick to set num classes to 1

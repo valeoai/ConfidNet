@@ -17,7 +17,7 @@ class Conv2dSame(nn.Module):
 
 class VGG16(AbstractModel):
     def __init__(self, config_args, device):
-        super(VGG16, self).__init__(config_args, device)
+        super().__init__(config_args, device)
         self.conv1 = Conv2dSame(config_args['data']['input_channels'], 64, 3)
         self.conv1_bn = nn.BatchNorm2d(64)
         self.conv1_dropout = nn.Dropout(0.3)

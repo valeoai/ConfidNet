@@ -6,7 +6,7 @@ from confidnet.models.small_convnet_svhn import Conv2dSame
 
 class SmallConvNetSVHNSelfConfidClassic(AbstractModel):
     def __init__(self, config_args, device):
-        super(SmallConvNetSVHNSelfConfidClassic, self).__init__(config_args, device)
+        super().__init__(config_args, device)
         self.feature_dim = config_args['model']['feature_dim']
         self.conv1 = Conv2dSame(config_args['data']['input_channels'], 32, 3)
         self.conv1_bn = nn.BatchNorm2d(32)

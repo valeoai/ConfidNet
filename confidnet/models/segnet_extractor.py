@@ -5,7 +5,7 @@ from confidnet.models.segnet import segnetDown2, segnetDown3, segnetUp2, segnetU
 
 class SegnetExtractor(AbstractModel):
     def __init__(self, config_args, device):
-        super(SegnetExtractor, self).__init__(config_args, device)
+        super().__init__(config_args, device)
         self.in_channels = config_args['data']['input_channels']
         self.n_classes = config_args['data']['num_classes']
         self.is_unpooling = True

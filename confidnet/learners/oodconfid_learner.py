@@ -11,7 +11,7 @@ LOGGER = get_logger(__name__, level='DEBUG')
 
 class OODConfidLearner(AbstractLeaner):
     def __init__(self, config_args, train_loader, val_loader, test_loader, start_epoch, device):
-        super(OODConfidLearner, self).__init__(config_args, train_loader, val_loader, test_loader, start_epoch, device)
+        super().__init__(config_args, train_loader, val_loader, test_loader, start_epoch, device)
 
     def train(self, epoch):
         self.model.train()
@@ -46,7 +46,7 @@ class OODConfidLearner(AbstractLeaner):
             metrics.update(pred, target, confidence)
 
             # Update the average loss
-            loop.set_description('Epoch {}/{}'.format(epoch, self.nb_epochs))
+            loop.set_description(f'Epoch {epoch}/{self.nb_epochs}')
             loop.set_postfix(OrderedDict({'loss':'{:05.3e}'.format(loss / float(len_data)),
                 'nll_loss':'{:05.3e}'.format(nll_loss / float(len_data)),
                 'confid_loss':'{:05.3e}'.format(confid_loss / float(len_data)),
@@ -56,7 +56,7 @@ class OODConfidLearner(AbstractLeaner):
         # Eval on epoch end
         scores = metrics.get_scores(split='train')
         logs_dict = OrderedDict({'epoch': {'value': epoch,
-                                           'string': '{:03}'.format(epoch)},
+                                           'string': f'{epoch:03}'},
                                  'train/loss': {'value': loss / float(len_data),
                                                 'string': '{:05.4e}'.format(loss / float(len_data))},
                                  'train/loss_nll': {'value': nll_loss / float(len_data),

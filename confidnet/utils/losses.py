@@ -14,7 +14,7 @@ class SelfConfidMSELoss(nn.modules.loss._Loss):
         self.task = config_args['training']['task']
         self.weighting = config_args['training']['loss']['weighting']
         self.device = device
-        super(SelfConfidMSELoss, self).__init__()
+        super().__init__()
 
     def forward(self, input, target):
         probs = F.softmax(input[0], dim=1)
@@ -36,7 +36,7 @@ class SelfConfidTCPRLoss(nn.modules.loss._Loss):
         self.task = config_args['training']['task']
         self.weighting = config_args['training']['loss']['weighting']
         self.device = device
-        super(SelfConfidTCPRLoss, self).__init__()
+        super().__init__()
 
     def forward(self, input, target):
         probs = F.softmax(input[0],dim=1)
@@ -58,7 +58,7 @@ class SelfConfidBCELoss(nn.modules.loss._Loss):
         self.nb_classes = config_args['data']['num_classes']
         self.weighting = config_args['training']['loss']['weighting']
         self.device = device
-        super(SelfConfidBCELoss, self).__init__()
+        super().__init__()
 
     def forward(self, input, target):
         confidence = input[1].squeeze(dim=1)
@@ -69,7 +69,7 @@ class SelfConfidBCELoss(nn.modules.loss._Loss):
 
 class FocalLoss(nn.modules.loss._Loss):
     def __init__(self, config_args, device):
-        super(FocalLoss, self).__init__()
+        super().__init__()
         self.alpha = config_args['training']['loss'].get('alpha', 0.25)
         self.gamma = config_args['training']['loss'].get('gamma', 5)
 
@@ -100,7 +100,7 @@ class StructuredMAPRankingLoss(nn.modules.loss._Loss):
     def __init__(self, device, config_args):
         self.nb_classes = config_args['data']['num_classes']
         self.device = device
-        super(StructuredMAPRankingLoss, self).__init__()
+        super().__init__()
 
     def forward(self, input, target):
         confidence = input[1]
@@ -119,7 +119,7 @@ class OODConfidenceLoss(nn.modules.loss._Loss):
         self.lbda = config_args['training']['loss']['lbda']
         self.lbda_control = config_args['training']['loss']['lbda_control']
         self.loss_nll, self.loss_confid = None, None
-        super(OODConfidenceLoss, self).__init__()
+        super().__init__()
 
     def forward(self, input, target):
         probs = F.softmax(input[0], dim=1)

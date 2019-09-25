@@ -11,7 +11,7 @@ def _fast_hist(label_true, label_pred, n_class):
     return hist
 
 
-class Metrics(object):
+class Metrics:
     def __init__(self, metrics, len_dataset, n_classes):
         self.metrics = metrics
         self.len_dataset = len_dataset
@@ -44,25 +44,25 @@ class Metrics(object):
         scores = {}
         if 'accuracy' in self.metrics:
             accuracy = self.accuracy / float(self.len_dataset)
-            scores['{}/accuracy'.format(split)] = {'value':accuracy, 'string':'{:05.2%}'.format(accuracy)}
+            scores[f'{split}/accuracy'] = {'value':accuracy, 'string':f'{accuracy:05.2%}'}
         if 'auc' in self.metrics:
             if len(np.unique(self.accurate)) == 1:
                 auc = 1
             else:
                 auc = roc_auc_score(self.accurate, self.proba_pred)
-            scores['{}/auc'.format(split)] = {'value':auc, 'string':'{:05.2%}'.format(auc)}
+            scores[f'{split}/auc'] = {'value':auc, 'string':f'{auc:05.2%}'}
         if 'ap_success' in self.metrics:
             ap_success = average_precision_score(self.accurate, self.proba_pred)
-            scores['{}/ap_success'.format(split)] = {'value':ap_success, 'string':'{:05.2%}'.format(ap_success)}
+            scores[f'{split}/ap_success'] = {'value':ap_success, 'string':f'{ap_success:05.2%}'}
         if 'accuracy_success' in self.metrics:
             accuracy_success = np.round(self.proba_pred[self.accurate==1]).mean()
-            scores['{}/accuracy_success'.format(split)] = {'value':accuracy_success, 'string':'{:05.2%}'.format(accuracy_success)}
+            scores[f'{split}/accuracy_success'] = {'value':accuracy_success, 'string':f'{accuracy_success:05.2%}'}
         if 'ap_errors' in self.metrics:
             ap_errors = average_precision_score(self.errors, -self.proba_pred)
-            scores['{}/ap_errors'.format(split)] = {'value':ap_errors, 'string':'{:05.2%}'.format(ap_errors)}
+            scores[f'{split}/ap_errors'] = {'value':ap_errors, 'string':f'{ap_errors:05.2%}'}
         if 'accuracy_errors' in self.metrics:
             accuracy_errors = 1. - np.round(self.proba_pred[self.errors==1]).mean()
-            scores['{}/accuracy_errors'.format(split)] = {'value':accuracy_errors, 'string':'{:05.2%}'.format(accuracy_errors)}
+            scores[f'{split}/accuracy_errors'] = {'value':accuracy_errors, 'string':f'{accuracy_errors:05.2%}'}
         if 'fpr_at_95tpr' in self.metrics:
             for delta in np.arange(self.proba_pred.min(), self.proba_pred.max(), (self.proba_pred.max()-self.proba_pred.min())/10000):
                 tpr = len(self.proba_pred[(self.accurate==1) & (self.proba_pred>=delta)]) / float(len(self.proba_pred[(self.accurate==1)]))
@@ -70,14 +70,14 @@ class Metrics(object):
                 print(tpr)
                 print('------')
                 if 0.9505 >= tpr >= 0.9495:
-                    print('Nearest threshold 95% TPR value: {}'.format(tpr))
-                    print('Threshold 95% TPR value: {}'.format(delta))
+                    print(f'Nearest threshold 95% TPR value: {tpr}')
+                    print(f'Threshold 95% TPR value: {delta}')
                     fpr = len(self.proba_pred[(self.errors==1) & (self.proba_pred>=delta)]) / float(len(self.proba_pred[(self.errors==1)]))
-                    scores['{}/fpr_at_95tpr'.format(split)] = {'value': fpr, 'string': '{:05.2%}'.format(fpr)}
+                    scores[f'{split}/fpr_at_95tpr'] = {'value': fpr, 'string': f'{fpr:05.2%}'}
                     break
         if 'mean_iou' in self.metrics:
             iou = np.diag(self.confusion_matrix) / (self.confusion_matrix.sum(axis=1) + self.confusion_matrix.sum(axis=0) - np.diag(self.confusion_matrix))
             mean_iou = np.nanmean(iou)
-            scores['{}/mean_iou'.format(split)] = {'value': mean_iou, 'string': '{:05.2%}'.format(mean_iou)}
+            scores[f'{split}/mean_iou'] = {'value': mean_iou, 'string': f'{mean_iou:05.2%}'}
 
         return scores

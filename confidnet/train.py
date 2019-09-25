@@ -38,7 +38,7 @@ def main():
             start_epoch = 1
         else:
             last_ckpt = list_previous_ckpt[-1]
-            checkpoint = torch.load(os.path.join(config_args['training']['output_folder'], '{}'.format(last_ckpt)))
+            checkpoint = torch.load(os.path.join(config_args['training']['output_folder'], f'{last_ckpt}'))
             start_epoch = checkpoint['epoch']+1
     else:
         LOGGER.info('Starting from scratch')
@@ -59,7 +59,7 @@ def main():
 
     # Resume existing model or from pretrained one
     if start_epoch > 1:
-        LOGGER.warning('Resuming from last checkpoint: {}'.format(last_ckpt))
+        LOGGER.warning(f'Resuming from last checkpoint: {last_ckpt}')
         learner.model.load_state_dict(checkpoint['model_state_dict'])
         learner.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     elif config_args['model']['resume']:
@@ -80,7 +80,7 @@ def main():
     LOGGER.info('Using model {}'.format(config_args['model']['name']))
     learner.model.print_summary(input_size=tuple([shape_i for shape_i in learner.train_loader.dataset[0][0].shape]))
     learner.tb_logger = TensorboardLogger(config_args['training']['output_folder'])
-    copyfile(args.config_path, os.path.join(config_args['training']['output_folder'],'config_{}.yaml'.format(start_epoch)))
+    copyfile(args.config_path, os.path.join(config_args['training']['output_folder'],f'config_{start_epoch}.yaml'))
     LOGGER.info('Sending batches as {}'.format(tuple([config_args['training']['batch_size']]
                                                      + [shape_i for shape_i
                                                         in learner.train_loader.dataset[0][0].shape])))
@@ -89,7 +89,7 @@ def main():
     # Parallelize model
     nb_gpus = torch.cuda.device_count()
     if nb_gpus > 1:
-        LOGGER.info('Parallelizing data to {} GPUs'.format(nb_gpus))
+        LOGGER.info(f'Parallelizing data to {nb_gpus} GPUs')
         learner.model = torch.nn.DataParallel(learner.model, device_ids=range(nb_gpus))
 
     # Set scheduler

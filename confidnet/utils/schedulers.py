@@ -6,7 +6,7 @@ LOGGER = get_logger(__name__, level='DEBUG')
 
 class ConstantLR(_LRScheduler):
     def __init__(self, optimizer, last_epoch=-1):
-        super(ConstantLR, self).__init__(optimizer, last_epoch)
+        super().__init__(optimizer, last_epoch)
 
     def get_lr(self):
         return [base_lr for base_lr in self.base_lrs]
@@ -17,7 +17,7 @@ class PolynomialLR(_LRScheduler):
         self.decay_iter = decay_iter
         self.max_iter = max_iter
         self.gamma = gamma
-        super(PolynomialLR, self).__init__(optimizer, last_epoch)
+        super().__init__(optimizer, last_epoch)
 
     def get_lr(self):
         if self.last_epoch % self.decay_iter or self.last_epoch % self.max_iter:
@@ -35,7 +35,7 @@ class WarmUpLR(_LRScheduler):
         self.scheduler = scheduler
         self.warmup_iters = warmup_iters
         self.gamma = gamma
-        super(WarmUpLR, self).__init__(optimizer, last_epoch)
+        super().__init__(optimizer, last_epoch)
 
     def get_lr(self):
         cold_lrs = self.scheduler.get_lr()
@@ -48,7 +48,7 @@ class WarmUpLR(_LRScheduler):
             elif self.mode == "constant":
                 factor = self.gamma
             else:
-                raise KeyError("WarmUp type {} not implemented".format(self.mode))
+                raise KeyError(f"WarmUp type {self.mode} not implemented")
 
             return [factor * base_lr for base_lr in cold_lrs]
 
@@ -74,7 +74,7 @@ def get_scheduler(optimizer, scheduler_dict, start_epoch):
     # Add last epoch
     scheduler_dict['last_epoch'] = start_epoch
 
-    LOGGER.info("Using {} scheduler with {} params".format(s_type, scheduler_dict))
+    LOGGER.info(f"Using {s_type} scheduler with {scheduler_dict} params")
 
     warmup_dict = {}
     if "warmup_iters" in scheduler_dict:

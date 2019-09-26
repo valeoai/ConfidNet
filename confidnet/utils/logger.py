@@ -47,10 +47,7 @@ def display_progress_bar(cur, total):
         Display progress bar.
     """
     bar_len = 30
-    filled_len = int(cur /
-                     float(total) * bar_len)
+    filled_len = cur // (total * bar_len)
     bar_waiter = '=' * filled_len + '.' * (bar_len - filled_len)
-    sys.stdout.write("\r{}/{} [{}] ".format(cur,
-                                            total,
-                                            bar_waiter))
+    sys.stdout.write(f"\r{cur}/{total} [{bar_waiter}] ")
     sys.stdout.flush()

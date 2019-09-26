@@ -62,8 +62,8 @@ class AbstractLeaner:
 		elif self.loss_args['name'] in losses.PYTORCH_LOSS:
 			self.criterion = losses.PYTORCH_LOSS[self.loss_args['name']](ignore_index=255)
 		else:
-			raise Exception("Loss {} not implemented".format(self.loss_args['name']))
-		LOGGER.info('Using loss {}'.format(self.loss_args['name']))
+			raise Exception(f"Loss {self.loss_args['name']} not implemented")
+		LOGGER.info(f"Using loss {self.loss_args['name']}")
 
 	def set_optimizer(self, optimizer_name):
 		optimizer_params = {k: v for k, v in self.config_args['training']['optimizer'].items() if k != 'name'}
@@ -75,7 +75,7 @@ class AbstractLeaner:
 		elif optimizer_name == 'adadelta':
 			self.optimizer = optim.Adadelta(self.model.parameters(), **optimizer_params)
 		else:
-			raise Exception('Bad optimizer name or not implemented (sgd, adam, adadelta).')
+			raise KeyError('Bad optimizer name or not implemented (sgd, adam, adadelta).')
 
 	def set_scheduler(self):
 		self.scheduler = get_scheduler(self.optimizer, self.lr_schedule, self.last_epoch)

@@ -95,7 +95,7 @@ class TrustScore:
             for label_idx in range(self.n_labels):
                 t0 = time.time()
                 d[:, label_idx] = self.kdtrees[label_idx].query(X, k=2)[0][:, -1]
-                print('KDTree for label %d run in %ls secondes' % (label_idx, time.time() - t0))
+                print(f'KDTree for label {label_idx} run in {time.time() - t0} secondes')
         else:
             LOGGER.warning(f'Enabling multiprocessing with {self.num_workers} workers for computing trust scores')
             self.current_X = X

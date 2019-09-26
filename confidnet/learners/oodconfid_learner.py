@@ -47,50 +47,50 @@ class OODConfidLearner(AbstractLeaner):
 
             # Update the average loss
             loop.set_description(f'Epoch {epoch}/{self.nb_epochs}')
-            loop.set_postfix(OrderedDict({'loss':'{:05.3e}'.format(loss / float(len_data)),
-                'nll_loss':'{:05.3e}'.format(nll_loss / float(len_data)),
-                'confid_loss':'{:05.3e}'.format(confid_loss / float(len_data)),
-                'acc':'{:05.2%}'.format(metrics.accuracy / float(len_steps))}))
+            loop.set_postfix(OrderedDict({'loss':'{:05.3e}'.format(loss / len_data),
+                'nll_loss':'{:05.3e}'.format(nll_loss / len_data),
+                'confid_loss':'{:05.3e}'.format(confid_loss / len_data),
+                'acc':'{:05.2%}'.format(metrics.accuracy / len_steps)}))
             loop.update()
 
         # Eval on epoch end
         scores = metrics.get_scores(split='train')
         logs_dict = OrderedDict({'epoch': {'value': epoch,
                                            'string': f'{epoch:03}'},
-                                 'train/loss': {'value': loss / float(len_data),
-                                                'string': '{:05.4e}'.format(loss / float(len_data))},
-                                 'train/loss_nll': {'value': nll_loss / float(len_data),
-                                                    'string': '{:05.4e}'.format(nll_loss / float(len_data))},
-                                 'train/loss_confid': {'value': confid_loss / float(len_data),
-                                                       'string': '{:05.4e}'.format(confid_loss / float(len_data))},
+                                 'train/loss': {'value': loss / len_data,
+                                                'string': '{:05.4e}'.format(loss / len_data)},
+                                 'train/loss_nll': {'value': nll_loss / len_data,
+                                                    'string': '{:05.4e}'.format(nll_loss / len_data)},
+                                 'train/loss_confid': {'value': confid_loss / len_data,
+                                                       'string': '{:05.4e}'.format(confid_loss / len_data)},
                                  })
         for s in scores:
             logs_dict[s] = scores[s]
 
         # Val scores
         val_losses, scores_val = self.evaluate(self.val_loader, self.prod_val_len, split='val')
-        logs_dict['val/loss'] = {'value': val_losses['loss'].item() / float(self.nsamples_val),
-                                 'string': '{:05.4e}'.format(val_losses['loss'].item() / float(self.nsamples_val))}
-        logs_dict['val/loss_nll'] = {'value': val_losses['loss_nll'].item() / float(self.nsamples_val),
+        logs_dict['val/loss'] = {'value': val_losses['loss'].item() / self.nsamples_val,
+                                 'string': '{:05.4e}'.format(val_losses['loss'].item() / self.nsamples_val)}
+        logs_dict['val/loss_nll'] = {'value': val_losses['loss_nll'].item() / self.nsamples_val,
                                      'string': '{:05.4e}'.format(
-                                         val_losses['loss_nll'].item() / float(self.nsamples_val))}
-        logs_dict['val/loss_confid'] = {'value': val_losses['loss_confid'].item() / float(self.nsamples_val),
+                                         val_losses['loss_nll'].item() / self.nsamples_val)}
+        logs_dict['val/loss_confid'] = {'value': val_losses['loss_confid'].item() / self.nsamples_val,
                                         'string': '{:05.4e}'.format(
-                                            val_losses['loss_confid'].item() / float(self.nsamples_val))}
+                                            val_losses['loss_confid'].item() / self.nsamples_val)}
         for sv in scores_val:
             logs_dict[sv] = scores_val[sv]
 
         # Test scores
         test_losses, scores_test = self.evaluate(self.test_loader, self.prod_test_len, split='test')
-        logs_dict['test/loss'] = {'value': test_losses['loss'].item() / float(self.nsamples_test),
+        logs_dict['test/loss'] = {'value': test_losses['loss'].item() / self.nsamples_test,
                                   'string': '{:05.4e}'.format(
-                                      test_losses['loss'].item() / float(self.nsamples_test))}
-        logs_dict['test/loss_nll'] = {'value': test_losses['loss_nll'].item() / float(self.nsamples_test),
+                                      test_losses['loss'].item() / self.nsamples_test)}
+        logs_dict['test/loss_nll'] = {'value': test_losses['loss_nll'].item() / self.nsamples_test,
                                       'string': '{:05.4e}'.format(
-                                          test_losses['loss_nll'].item() / float(self.nsamples_test))}
-        logs_dict['test/loss_confid'] = {'value': test_losses['loss_confid'].item() / float(self.nsamples_test),
+                                          test_losses['loss_nll'].item() / self.nsamples_test)}
+        logs_dict['test/loss_confid'] = {'value': test_losses['loss_confid'].item() / self.nsamples_test,
                                          'string': '{:05.4e}'.format(
-                                             test_losses['loss_confid'].item() / float(self.nsamples_test))}
+                                             test_losses['loss_confid'].item() / self.nsamples_test)}
         for st in scores_test:
             logs_dict[st] = scores_test[st]
 

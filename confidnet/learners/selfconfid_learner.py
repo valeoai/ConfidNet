@@ -61,33 +61,33 @@ class SelfConfidLearner(AbstractLeaner):
 
             # Update the average loss
             loop.set_description(f'Epoch {epoch}/{self.nb_epochs}')
-            loop.set_postfix(OrderedDict({'loss_confid': '{:05.3e}'.format(loss / float(len_data)),
-                                          'acc': '{:05.2%}'.format(metrics.accuracy / float(len_steps))}))
+            loop.set_postfix(OrderedDict({'loss_confid': '{:05.3e}'.format(loss / len_data),
+                                          'acc': '{:05.2%}'.format(metrics.accuracy / len_steps)}))
             loop.update()
 
         # Eval on epoch end        
         scores = metrics.get_scores(split='train')
         logs_dict = OrderedDict({'epoch': {'value':epoch,
                                            'string': f'{epoch:03}'},
-                                 'train/loss_confid': {'value': loss / float(len_data),
-                                                       'string': '{:05.4e}'.format(loss / float(len_data))},
+                                 'train/loss_confid': {'value': loss / len_data,
+                                                       'string': '{:05.4e}'.format(loss / len_data)},
                                  })
         for s in scores:
             logs_dict[s] = scores[s]
         
         # Val scores
         val_losses, scores_val = self.evaluate(self.val_loader, self.prod_val_len, split='val')
-        logs_dict['val/loss_confid'] = {'value': val_losses['loss_confid'].item() / float(self.nsamples_val),
+        logs_dict['val/loss_confid'] = {'value': val_losses['loss_confid'].item() / self.nsamples_val,
                                         'string': '{:05.4e}'.format(val_losses['loss_confid'].item()
-                                                                    / float(self.nsamples_val))}
+                                                                    / self.nsamples_val)}
         for sv in scores_val:
             logs_dict[sv] = scores_val[sv]
             
         # Test scores
         test_losses, scores_test = self.evaluate(self.test_loader, self.prod_test_len, split='test')
-        logs_dict['test/loss_confid'] = {'value': test_losses['loss_confid'].item() / float(self.nsamples_test),
+        logs_dict['test/loss_confid'] = {'value': test_losses['loss_confid'].item() / self.nsamples_test,
                                          'string':'{:05.4e}'.format(test_losses['loss_confid'].item()
-                                                                    / float(self.nsamples_test))}
+                                                                    / self.nsamples_test)}
         for st in scores_test:
             logs_dict[st] = scores_test[st]
             

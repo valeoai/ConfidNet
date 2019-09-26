@@ -43,7 +43,7 @@ class Metrics:
 
         scores = {}
         if 'accuracy' in self.metrics:
-            accuracy = self.accuracy / float(self.len_dataset)
+            accuracy = self.accuracy / self.len_dataset
             scores[f'{split}/accuracy'] = {'value':accuracy, 'string':f'{accuracy:05.2%}'}
         if 'auc' in self.metrics:
             if len(np.unique(self.accurate)) == 1:
@@ -65,14 +65,14 @@ class Metrics:
             scores[f'{split}/accuracy_errors'] = {'value':accuracy_errors, 'string':f'{accuracy_errors:05.2%}'}
         if 'fpr_at_95tpr' in self.metrics:
             for delta in np.arange(self.proba_pred.min(), self.proba_pred.max(), (self.proba_pred.max()-self.proba_pred.min())/10000):
-                tpr = len(self.proba_pred[(self.accurate==1) & (self.proba_pred>=delta)]) / float(len(self.proba_pred[(self.accurate==1)]))
+                tpr = len(self.proba_pred[(self.accurate==1) & (self.proba_pred>=delta)]) / len(self.proba_pred[(self.accurate==1)])
                 print(delta)
                 print(tpr)
                 print('------')
                 if 0.9505 >= tpr >= 0.9495:
                     print(f'Nearest threshold 95% TPR value: {tpr}')
                     print(f'Threshold 95% TPR value: {delta}')
-                    fpr = len(self.proba_pred[(self.errors==1) & (self.proba_pred>=delta)]) / float(len(self.proba_pred[(self.errors==1)]))
+                    fpr = len(self.proba_pred[(self.errors==1) & (self.proba_pred>=delta)]) / len(self.proba_pred[(self.errors==1)])
                     scores[f'{split}/fpr_at_95tpr'] = {'value': fpr, 'string': f'{fpr:05.2%}'}
                     break
         if 'mean_iou' in self.metrics:

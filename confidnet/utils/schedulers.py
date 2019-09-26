@@ -23,7 +23,7 @@ class PolynomialLR(_LRScheduler):
         if self.last_epoch % self.decay_iter or self.last_epoch % self.max_iter:
             return [base_lr for base_lr in self.base_lrs]
         else:
-            factor = (1 - self.last_epoch / float(self.max_iter)) ** self.gamma
+            factor = (1 - self.last_epoch / self.max_iter) ** self.gamma
             return [base_lr * factor for base_lr in self.base_lrs]
 
 
@@ -42,7 +42,7 @@ class WarmUpLR(_LRScheduler):
 
         if self.last_epoch < self.warmup_iters:
             if self.mode == "linear":
-                alpha = self.last_epoch / float(self.warmup_iters)
+                alpha = self.last_epoch / self.warmup_iters
                 factor = self.gamma * (1 - alpha) + alpha
 
             elif self.mode == "constant":

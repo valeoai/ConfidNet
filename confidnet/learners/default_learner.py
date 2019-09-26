@@ -46,8 +46,8 @@ class DefaultLearner(AbstractLeaner):
 
             # Update the average loss
             loop.set_description(f'Epoch {epoch}/{self.nb_epochs}')
-            loop.set_postfix(OrderedDict({'loss_nll': '{:05.4e}'.format(loss / float(len_data)),
-                                          'acc': '{:05.2%}'.format(metrics.accuracy / float(len_steps))}))
+            loop.set_postfix(OrderedDict({'loss_nll': '{:05.4e}'.format(loss / len_data),
+                                          'acc': '{:05.2%}'.format(metrics.accuracy / len_steps)}))
             loop.update()
         
         # Eval on epoch end        
@@ -56,8 +56,8 @@ class DefaultLearner(AbstractLeaner):
                                            'string': f'{epoch:03}'},
                                  'lr': {'value': self.optimizer.param_groups[0]['lr'],
                                         'string': '{:05.1e}'.format(self.optimizer.param_groups[0]['lr'])},
-                                 'train/loss_nll': {'value': loss / float(len_data),
-                                                    'string': '{:05.4e}'.format(loss / float(len_data))},
+                                 'train/loss_nll': {'value': loss / len_data,
+                                                    'string': '{:05.4e}'.format(loss / len_data)},
                                  })
         for s in scores:
             logs_dict[s] = scores[s]
@@ -65,18 +65,18 @@ class DefaultLearner(AbstractLeaner):
         # Val scores
         if self.val_loader is not None:
             val_losses, scores_val = self.evaluate(self.val_loader, self.prod_val_len, split='val')
-            logs_dict['val/loss_nll'] = {'value': val_losses['loss_nll'].item() / float(self.nsamples_val),
+            logs_dict['val/loss_nll'] = {'value': val_losses['loss_nll'].item() / self.nsamples_val,
                                          'string': '{:05.4e}'.format(val_losses['loss_nll'].item()
-                                                                     / float(self.nsamples_val))
+                                                                     / self.nsamples_val)
                                          }
             for sv in scores_val:
                 logs_dict[sv] = scores_val[sv]
             
         # Test scores
         test_losses, scores_test = self.evaluate(self.test_loader, self.prod_test_len, split='test')
-        logs_dict['test/loss_nll'] = {'value': test_losses['loss_nll'].item() / float(self.nsamples_test),
+        logs_dict['test/loss_nll'] = {'value': test_losses['loss_nll'].item() / self.nsamples_test,
                                       'string': '{:05.4e}'.format(test_losses['loss_nll'].item()
-                                                                  / float(self.nsamples_test))
+                                                                  / self.nsamples_test)
                                       }
         for st in scores_test:
             logs_dict[st] = scores_test[st]

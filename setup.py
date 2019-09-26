@@ -12,6 +12,5 @@ setup(
     cmdclass={'build_ext': BuildExtension},
     install_requires=['pyyaml', 'coloredlogs',
                       'torchsummary', 'verboselogs',
-                      'future',
-                      'setuptools', 'tqdm'],
+                      'setuptools', 'tqdm', 'click', 'scikit-learn'],
     packages=find_packages())

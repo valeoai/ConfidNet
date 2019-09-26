@@ -23,10 +23,10 @@ recent approaches specifically designed for failure prediction.
 
 ### Training
 ```
-python3 train.py -c confs/your_config_file.yaml 
+python3 confidnet/train.py -c confidnet/confs/your_config_file.yaml 
 ```
 
 ### Testing
 ```
-python3 test.py -c confs/your_config_file.yaml 
+python3 confidnet/test.py -c confidnet/confs/your_config_file.yaml 
 ```

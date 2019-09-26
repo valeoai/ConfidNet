@@ -60,6 +60,6 @@ def get_model(config_args, device):
     }
     
     if config_args['model']['name'].lower() not in model_factory:
-        raise Exception("Model {} non existing".format(config_args['model_name']))
+        raise Exception("Model {} non existing".format(config_args['model']['name']))
         
     return model_factory[config_args['model']['name']](config_args=config_args, device=device)

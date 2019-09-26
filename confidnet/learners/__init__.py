@@ -1,6 +1,6 @@
 from confidnet.learners.default_learner import DefaultLearner
-from confidnet.learners.selfconfid_learner import SelfConfidLearner
 from confidnet.learners.oodconfid_learner import OODConfidLearner
+from confidnet.learners.selfconfid_learner import SelfConfidLearner
 
 
 def get_learner(config_args, train_loader, val_loader, test_loader, start_epoch, device):

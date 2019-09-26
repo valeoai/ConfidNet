@@ -1,6 +1,7 @@
 import torch.nn as nn
-from confidnet.models.model import AbstractModel
 import torch.nn.functional as F
+
+from confidnet.models.model import AbstractModel
 from confidnet.models.segnet import segnetDown2, segnetDown3, segnetUp2, segnetUp3
 
 

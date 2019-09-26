@@ -1,8 +1,9 @@
 import torch
 from torchvision import datasets
-from confidnet.loaders.loader import AbstractDataLoader
+
 from confidnet.augmentations import get_composed_augmentations
 from confidnet.loaders.camvid_dataset import CamvidDataset
+from confidnet.loaders.loader import AbstractDataLoader
 
 
 class MNISTLoader(AbstractDataLoader):

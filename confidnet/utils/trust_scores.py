@@ -1,10 +1,13 @@
 # Code referenced from https://github.com/google/TrustScore
+import multiprocessing
+import time
+
 import numpy as np
 from sklearn.neighbors import KDTree
 from sklearn.neighbors import KNeighborsClassifier
-import multiprocessing
-import time
+
 from confidnet.utils.logger import get_logger
+
 LOGGER = get_logger(__name__, level='DEBUG')
 
 class TrustScore:

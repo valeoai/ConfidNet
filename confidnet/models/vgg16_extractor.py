@@ -1,5 +1,6 @@
 import torch.nn as nn
 import torch.nn.functional as F
+
 from confidnet.models.model import AbstractModel
 from confidnet.models.vgg16 import Conv2dSame
 

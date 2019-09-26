@@ -1,15 +1,16 @@
-import os
 import argparse
-import numpy as np
-from tqdm import tqdm
-import torch
+import os
 
-from confidnet.loaders import get_loader_class
+import numpy as np
+import torch
+from tqdm import tqdm
+
 from confidnet.learners import get_learner
+from confidnet.loaders import get_loader_class
 from confidnet.models import get_model
 from confidnet.utils import trust_scores
-from confidnet.utils.metrics import Metrics
 from confidnet.utils.logger import get_logger
+from confidnet.utils.metrics import Metrics
 from confidnet.utils.misc import load_yaml
 
 LOGGER = get_logger(__name__, level='DEBUG')

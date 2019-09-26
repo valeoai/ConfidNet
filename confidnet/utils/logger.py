@@ -1,8 +1,9 @@
 """
     Logger utilities. It improves levels of logger and add coloration for each level
 """
-import sys
 import logging
+import sys
+
 import coloredlogs
 import verboselogs
 

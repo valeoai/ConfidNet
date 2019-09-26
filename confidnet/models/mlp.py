@@ -1,6 +1,8 @@
 import torch.nn as nn
 import torch.nn.functional as F
+
 from confidnet.models.model import AbstractModel
+
 
 class MLP(AbstractModel):
     def __init__(self, config_args, device):

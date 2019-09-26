@@ -1,12 +1,15 @@
 import os
-import torch
-import numpy as np
-from tqdm import tqdm
 from collections import OrderedDict
+
+import numpy as np
+import torch
+from tqdm import tqdm
+
 from confidnet.learners.learner import AbstractLeaner
-from confidnet.utils.metrics import Metrics
 from confidnet.utils import misc
 from confidnet.utils.logger import get_logger
+from confidnet.utils.metrics import Metrics
+
 LOGGER = get_logger(__name__, level='DEBUG')
 
 

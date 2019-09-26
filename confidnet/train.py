@@ -1,14 +1,15 @@
 import argparse
 import os
 from shutil import copyfile
+
 import click
 import torch
 
-from confidnet.loaders import get_loader_class
 from confidnet.learners import get_learner
-from confidnet.utils.tensorboard_logger import TensorboardLogger
+from confidnet.loaders import get_loader_class
 from confidnet.utils.logger import get_logger
 from confidnet.utils.misc import load_yaml
+from confidnet.utils.tensorboard_logger import TensorboardLogger
 
 LOGGER = get_logger(__name__, level='DEBUG')
 

@@ -1,7 +1,9 @@
 import torch.nn as nn
 import torch.nn.functional as F
-from confidnet.models.model import AbstractModel
 from torchvision import models
+
+from confidnet.models.model import AbstractModel
+
 
 class Conv2dSame(nn.Module):
     def __init__(self, in_channels, out_channels, kernel_size, bias=True, padding_layer=nn.ReflectionPad2d):

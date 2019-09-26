@@ -1,6 +1,8 @@
 from torchvision import transforms
+
 from confidnet.augmentations import segmentation_transforms
 from confidnet.utils.logger import get_logger
+
 LOGGER = get_logger(__name__, level='DEBUG')
 
 CLASSIFICATION_AUGMENTATION = {

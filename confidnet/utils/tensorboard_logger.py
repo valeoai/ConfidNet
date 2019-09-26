@@ -1,8 +1,9 @@
 # Code referenced from https://gist.github.com/gyglim/1f8dfb1b5c82627ae3efcfbbadb9f514
-import tensorflow as tf
+from io import BytesIO  # Python 3.x
+
 import numpy as np
-import scipy.misc 
-from io import BytesIO         # Python 3.x
+import scipy.misc
+import tensorflow as tf
 
 
 class TensorboardLogger:

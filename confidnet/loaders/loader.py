@@ -1,8 +1,10 @@
-import torch
 import numpy as np
+import torch
 from torch.utils.data.sampler import SubsetRandomSampler
+
 from confidnet.augmentations import get_composed_augmentations
 from confidnet.utils.logger import get_logger
+
 LOGGER = get_logger(__name__, level='DEBUG')
 
 

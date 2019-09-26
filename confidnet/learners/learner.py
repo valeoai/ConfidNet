@@ -1,10 +1,13 @@
 import os
+
 import torch
 import torch.optim as optim
-from confidnet.utils import losses
+
 from confidnet.models import get_model
-from confidnet.utils.schedulers import get_scheduler
+from confidnet.utils import losses
 from confidnet.utils.logger import get_logger
+from confidnet.utils.schedulers import get_scheduler
+
 LOGGER = get_logger(__name__, level='DEBUG')
 
 

@@ -1,8 +1,9 @@
+import structured_map_ranking_loss
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+
 from confidnet.utils import misc
-import structured_map_ranking_loss
 
 
 class SelfConfidMSELoss(nn.modules.loss._Loss):

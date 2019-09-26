@@ -1,28 +1,30 @@
 from confidnet.models.mlp import MLP
 from confidnet.models.mlp_extractor import MLPExtractor
+from confidnet.models.mlp_oodconfid import MLPOODConfid
 from confidnet.models.mlp_selfconfid import MLPSelfConfid
 from confidnet.models.mlp_selfconfid_cloning import MLPSelfConfidCloning
-from confidnet.models.mlp_oodconfid import MLPOODConfid
-from confidnet.models.small_convnet_mnist import SmallConvNetMNIST
-from confidnet.models.small_convnet_mnist_extractor import SmallConvNetMNISTExtractor
-from confidnet.models.small_convnet_mnist_selfconfid_classic import SmallConvNetMNISTSelfConfidClassic
-from confidnet.models.small_convnet_mnist_selfconfid_cloning import SmallConvNetMNISTSelfConfidCloning
-from confidnet.models.small_convnet_mnist_oodconfid import SmallConvNetMNISTOODConfid
-from confidnet.models.small_convnet_svhn import SmallConvNetSVHN
-from confidnet.models.small_convnet_svhn_extractor import SmallConvNetSVHNExtractor
-from confidnet.models.small_convnet_svhn_selfconfid_classic import SmallConvNetSVHNSelfConfidClassic
-from confidnet.models.small_convnet_svhn_selfconfid_cloning import SmallConvNetSVHNSelfConfidCloning
-from confidnet.models.small_convnet_svhn_oodconfid import SmallConvNetSVHNOODConfid
-from confidnet.models.vgg16 import VGG16
-from confidnet.models.vgg16_extractor import VGG16Extractor
-from confidnet.models.vgg16_selfconfid_classic import VGG16SelfConfidClassic
-from confidnet.models.vgg16_selfconfid_cloning import VGG16SelfConfidCloning
-from confidnet.models.vgg16_oodconfid import VGG16OODConfid
 from confidnet.models.segnet import Segnet
 from confidnet.models.segnet_extractor import SegnetExtractor
+from confidnet.models.segnet_oodconfid import SegNetOODConfid
 from confidnet.models.segnet_selfconfid import SegnetSelfConfid
 from confidnet.models.segnet_selfconfid_cloning import SegnetSelfConfidCloning
-from confidnet.models.segnet_oodconfid import SegNetOODConfid
+from confidnet.models.small_convnet_mnist import SmallConvNetMNIST
+from confidnet.models.small_convnet_mnist_extractor import SmallConvNetMNISTExtractor
+from confidnet.models.small_convnet_mnist_oodconfid import SmallConvNetMNISTOODConfid
+from confidnet.models.small_convnet_mnist_selfconfid_classic import \
+    SmallConvNetMNISTSelfConfidClassic
+from confidnet.models.small_convnet_mnist_selfconfid_cloning import \
+    SmallConvNetMNISTSelfConfidCloning
+from confidnet.models.small_convnet_svhn import SmallConvNetSVHN
+from confidnet.models.small_convnet_svhn_extractor import SmallConvNetSVHNExtractor
+from confidnet.models.small_convnet_svhn_oodconfid import SmallConvNetSVHNOODConfid
+from confidnet.models.small_convnet_svhn_selfconfid_classic import SmallConvNetSVHNSelfConfidClassic
+from confidnet.models.small_convnet_svhn_selfconfid_cloning import SmallConvNetSVHNSelfConfidCloning
+from confidnet.models.vgg16 import VGG16
+from confidnet.models.vgg16_extractor import VGG16Extractor
+from confidnet.models.vgg16_oodconfid import VGG16OODConfid
+from confidnet.models.vgg16_selfconfid_classic import VGG16SelfConfidClassic
+from confidnet.models.vgg16_selfconfid_cloning import VGG16SelfConfidCloning
 
 
 def get_model(config_args, device):

@@ -1,6 +1,7 @@
-from confidnet.models.model import AbstractModel
 from confidnet.models.mlp import MLP
 from confidnet.models.mlp_selfconfid import MLPSelfConfid
+from confidnet.models.model import AbstractModel
+
 
 class MLPSelfConfidCloning(AbstractModel):
     def __init__(self, config_args, device):

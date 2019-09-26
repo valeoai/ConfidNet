@@ -1,6 +1,8 @@
 import torch.nn as nn
 from torchsummary import summary
+
 from confidnet.utils.logger import get_logger
+
 LOGGER = get_logger(__name__, level='DEBUG')
 
 

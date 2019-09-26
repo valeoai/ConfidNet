@@ -1,8 +1,9 @@
-import os
 import csv
+import os
+from pathlib import Path
+
 import torch
 import yaml
-from pathlib import Path
 
 
 def one_hot_embedding(labels, num_classes):

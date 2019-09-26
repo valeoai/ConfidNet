@@ -1,7 +1,8 @@
 import os
+
 import numpy as np
-from PIL import Image
 import torch.utils.data as data
+from PIL import Image
 
 class_names = [
         'Sky',

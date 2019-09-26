@@ -50,4 +50,6 @@ def load_yaml(path):
 
     config_args['data']['data_dir'] = Path(config_args['data']['data_dir'])
     config_args['training']['output_folder'] = Path(config_args['training']['output_folder'])
+    if config_args['model']['resume'] is not None:
+        config_args['model']['resume'] = Path(config_args['model']['resume'])
     return config_args

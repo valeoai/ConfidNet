@@ -1,4 +1,3 @@
-import os
 import torch
 import numpy as np
 from torch.utils.data.sampler import SubsetRandomSampler
@@ -17,7 +16,7 @@ class AbstractDataLoader:
                          data['input_channels'])
         self.augmentations = training.get('augmentations', None)
         self.ft_on_val = training.get('ft_on_val', None)
-        self.resume_folder = os.path.dirname(model['resume']) if model['resume'] else None
+        self.resume_folder = model['resume'].parent if model['resume'] else None
         self.valid_size = data['valid_size']
         self.perturbed_folder = data.get('perturbed_images', None)
         self.pin_memory = training['pin_memory']
@@ -65,22 +64,22 @@ class AbstractDataLoader:
             num_train = len(self.train_dataset)
             indices = list(range(num_train))
 
-            if os.path.exists(os.path.join(self.output_folder, 'train_idx.npy')):
+            if (self.output_folder / 'train_idx.npy').exists():
                 LOGGER.warning('Loading existing train-val split indices')
-                train_idx = np.load(os.path.join(self.output_folder, 'train_idx.npy'))
-                val_idx = np.load(os.path.join(self.output_folder, 'val_idx.npy'))
+                train_idx = np.load(self.output_folder / 'train_idx.npy')
+                val_idx = np.load(self.output_folder / 'val_idx.npy')
             # Splitting indices
             elif self.resume_folder:
                 LOGGER.warning('Loading existing train-val split indices from ORIGINAL training')
-                train_idx = np.load(os.path.join(self.resume_folder, 'train_idx.npy'))
-                val_idx = np.load(os.path.join(self.resume_folder, 'val_idx.npy'))
+                train_idx = np.load(self.resume_folder / 'train_idx.npy')
+                val_idx = np.load(self.resume_folder / 'val_idx.npy')
             else:
                 split = int(np.floor(self.valid_size * num_train))
                 np.random.seed(42)
                 np.random.shuffle(indices)
                 train_idx, val_idx = indices[split:], indices[:split]
-                np.save(os.path.join(self.output_folder, 'train_idx.npy'), train_idx)
-                np.save(os.path.join(self.output_folder, 'val_idx.npy'), val_idx)
+                np.save(self.output_folder / 'train_idx.npy', train_idx)
+                np.save(self.output_folder / 'val_idx.npy', val_idx)
             # Make samplers
             train_sampler = SubsetRandomSampler(train_idx)
             val_sampler = SubsetRandomSampler(val_idx)

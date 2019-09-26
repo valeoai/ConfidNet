@@ -1,7 +1,7 @@
 set -e
 
 export DOCKER_HOST=ssh://shared_account@10.3.54.102
-DOCKER_BUILDKIT=1 docker build -t test_image .
+DOCKER_BUILDKIT=1 docker build --progress=plain -t test_image .
 
 docker run \
           --runtime=nvidia \

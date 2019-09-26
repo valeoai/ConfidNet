@@ -1,7 +1,7 @@
 from confidnet.loaders import usualtorch_loader as dload
 
 
-def get_loader(config_args):
+def get_loader_class(name):
     """
         Return a new instance of dataset loader
     """
@@ -15,4 +15,4 @@ def get_loader(config_args):
         'camvid': dload.CamVidLoader
     }
 
-    return data_loader_factory[config_args['data']['dataset']](config_args=config_args)
+    return data_loader_factory[name]

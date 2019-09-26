@@ -5,7 +5,7 @@ import click
 import yaml
 import torch
 
-from confidnet.loaders import get_loader
+from confidnet.loaders import get_loader_class
 from confidnet.learners import get_learner
 from confidnet.utils.tensorboard_logger import TensorboardLogger
 from confidnet.utils.logger import get_logger
@@ -47,7 +47,7 @@ def main():
             
     # Load dataset
     LOGGER.info('Loading dataset {}'.format(config_args['data']['dataset']))
-    dloader = get_loader(config_args)
+    dloader = get_loader_class(config_args['data']['dataset'])(**config_args)
 
     # Make loaders
     dloader.make_loaders()

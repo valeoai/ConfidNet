@@ -7,13 +7,17 @@ from confidnet.models.model import AbstractModel
 class MLPSelfConfid(AbstractModel):
     def __init__(self, config_args, device):
         super().__init__(config_args, device)
-        self.dropout = config_args['model']['is_dropout']
-        self.fc1 = nn.Linear(config_args['data']['input_size'][0] * config_args['data']['input_size'][1],
-                             config_args['model']['hidden_size'])
-        self.fc2 = nn.Linear(config_args['model']['hidden_size'], config_args['data']['num_classes'])
+        self.dropout = config_args["model"]["is_dropout"]
+        self.fc1 = nn.Linear(
+            config_args["data"]["input_size"][0] * config_args["data"]["input_size"][1],
+            config_args["model"]["hidden_size"],
+        )
+        self.fc2 = nn.Linear(
+            config_args["model"]["hidden_size"], config_args["data"]["num_classes"]
+        )
         self.fc_dropout = nn.Dropout(0.3)
 
-        self.uncertainty1 = nn.Linear(config_args['model']['hidden_size'], 400)
+        self.uncertainty1 = nn.Linear(config_args["model"]["hidden_size"], 400)
         self.uncertainty2 = nn.Linear(400, 400)
         self.uncertainty3 = nn.Linear(400, 400)
         self.uncertainty4 = nn.Linear(400, 400)

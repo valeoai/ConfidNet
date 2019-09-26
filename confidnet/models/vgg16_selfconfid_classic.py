@@ -8,7 +8,7 @@ from confidnet.models.vgg16 import Conv2dSame
 class VGG16SelfConfidClassic(AbstractModel):
     def __init__(self, config_args, device):
         super().__init__(config_args, device)
-        self.conv1 = Conv2dSame(config_args['data']['input_channels'], 64, 3)
+        self.conv1 = Conv2dSame(config_args["data"]["input_channels"], 64, 3)
         self.conv1_bn = nn.BatchNorm2d(64)
         self.conv1_dropout = nn.Dropout(0.3)
         self.conv2 = Conv2dSame(64, 64, 3)
@@ -56,7 +56,7 @@ class VGG16SelfConfidClassic(AbstractModel):
 
         self.fc1 = nn.Linear(512, 512)
         self.dropout_fc = nn.Dropout(0.5)
-        self.fc2 = nn.Linear(512, config_args['data']['num_classes'])
+        self.fc2 = nn.Linear(512, config_args["data"]["num_classes"])
 
         self.uncertainty1 = nn.Linear(512, 400)
         self.uncertainty2 = nn.Linear(400, 400)

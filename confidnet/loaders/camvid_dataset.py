@@ -5,45 +5,73 @@ import torch.utils.data as data
 from PIL import Image
 
 class_names = [
-        'Sky',
-        'Building',
-        'Pole',
-        # 'Road_marking',
-        'Road',
-        'Pavement',
-        'Tree',
-        'SignSymbol',
-        'Fence',
-        'Car',
-        'Pedestrian',
-        'Bicyclist',
-        'Unlabelled',
-    ]
+    "Sky",
+    "Building",
+    "Pole",
+    # 'Road_marking',
+    "Road",
+    "Pavement",
+    "Tree",
+    "SignSymbol",
+    "Fence",
+    "Car",
+    "Pedestrian",
+    "Bicyclist",
+    "Unlabelled",
+]
 
 # color codes for displaying segmentation results
-Sky = [128,128,128]
-Building = [128,0,0]
-Pole = [192,192,128]
-Road_marking = [255,69,0] # not used
-Road = [128,64,128]
-Pavement = [60,40,222]
-Tree = [128,128,0]
-SignSymbol = [192,128,128]
-Fence = [64,64,128]
-Car = [64,0,128]
-Pedestrian = [64,64,0]
-Bicyclist = [0,128,192]
-Unlabelled = [0,0,0]
+Sky = [128, 128, 128]
+Building = [128, 0, 0]
+Pole = [192, 192, 128]
+Road_marking = [255, 69, 0]  # not used
+Road = [128, 64, 128]
+Pavement = [60, 40, 222]
+Tree = [128, 128, 0]
+SignSymbol = [192, 128, 128]
+Fence = [64, 64, 128]
+Car = [64, 0, 128]
+Pedestrian = [64, 64, 0]
+Bicyclist = [0, 128, 192]
+Unlabelled = [0, 0, 0]
 
-label_colors = np.array([Sky, Building, Pole, Road, Pavement, Tree, SignSymbol, Fence, Car, Pedestrian, Bicyclist, Unlabelled], dtype=np.uint8)
+label_colors = np.array(
+    [
+        Sky,
+        Building,
+        Pole,
+        Road,
+        Pavement,
+        Tree,
+        SignSymbol,
+        Fence,
+        Car,
+        Pedestrian,
+        Bicyclist,
+        Unlabelled,
+    ],
+    dtype=np.uint8,
+)
 
 # fetched from Kendall
-class_weights = np.array([ 0.2595, 0.1826, 4.5640, 0.1417, 0.9051, 0.3826, 9.6446, 1.8418, 0.6823, 6.2478 ,7.3614, 0.0])
+class_weights = np.array(
+    [0.2595, 0.1826, 4.5640, 0.1417, 0.9051, 0.3826, 9.6446, 1.8418, 0.6823, 6.2478, 7.3614, 0.0]
+)
 
 
 class CamvidDataset(data.Dataset):
-    def __init__(self, data_dir, split='train', transform=None, list_dir=None,
-                 img_size=[360, 480], crop_size=0, num_classes=12, phase=None, subset=''):
+    def __init__(
+        self,
+        data_dir,
+        split="train",
+        transform=None,
+        list_dir=None,
+        img_size=[360, 480],
+        crop_size=0,
+        num_classes=12,
+        phase=None,
+        subset="",
+    ):
         self.list_dir = data_dir if list_dir is None else list_dir
         self.data_dir = data_dir
         self.split = split
@@ -71,24 +99,24 @@ class CamvidDataset(data.Dataset):
         Returns:
             tuple: (image, target) where target is index of the target class.
         """
-        img = Image.open(f'{self.data_dir}/{self.image_list[index]}')
+        img = Image.open(f"{self.data_dir}/{self.image_list[index]}")
         if self.label_list is not None:
-            target = Image.open(f'{self.data_dir}/{self.label_list[index]}')
+            target = Image.open(f"{self.data_dir}/{self.label_list[index]}")
 
         if self.transform is not None:
             img, target = self.transform(img, target)
 
-        return img, (target*255).long()
+        return img, (target * 255).long()
 
     def __len__(self):
         return len(self.image_list)
 
     def read_lists(self):
-        image_path = self.data_dir / (self.split + '.txt')
+        image_path = self.data_dir / (self.split + ".txt")
         assert image_path.exists()
-        self.image_list = [line.strip().split()[0] for line in open(image_path, 'r')]
-        self.label_list = [line.strip().split()[1] for line in open(image_path, 'r')]
-        print(f'fetched {len(self.image_list)} images from text file')
+        self.image_list = [line.strip().split()[0] for line in open(image_path, "r")]
+        self.label_list = [line.strip().split()[1] for line in open(image_path, "r")]
+        print(f"fetched {len(self.image_list)} images from text file")
         assert len(self.image_list) == len(self.label_list)
 
     # input prediction should be a torch Tensor

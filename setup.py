@@ -4,13 +4,25 @@ from torch.utils.cpp_extension import CppExtension, BuildExtension
 
 
 setup(
-    name='ConfidNet',
-    author='Charles Corbiere',
-    url='https://github.com/valeoai/ConfidNet',
-    ext_modules=[CppExtension('confidnet.structured_map_ranking_loss',
-                              ['confidnet/cpp_loss/structured_map_ranking_loss.cpp'])],
-    cmdclass={'build_ext': BuildExtension},
-    install_requires=['pyyaml', 'coloredlogs',
-                      'torchsummary', 'verboselogs',
-                      'setuptools', 'tqdm', 'click', 'scikit-learn'],
-    packages=find_packages())
+    name="ConfidNet",
+    author="Charles Corbiere",
+    url="https://github.com/valeoai/ConfidNet",
+    ext_modules=[
+        CppExtension(
+            "confidnet.structured_map_ranking_loss",
+            ["confidnet/cpp_loss/structured_map_ranking_loss.cpp"],
+        )
+    ],
+    cmdclass={"build_ext": BuildExtension},
+    install_requires=[
+        "pyyaml",
+        "coloredlogs",
+        "torchsummary",
+        "verboselogs",
+        "setuptools",
+        "tqdm",
+        "click",
+        "scikit-learn",
+    ],
+    packages=find_packages(),
+)

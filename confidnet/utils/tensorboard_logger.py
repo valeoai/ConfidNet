@@ -7,7 +7,6 @@ import tensorflow as tf
 
 
 class TensorboardLogger:
-    
     def __init__(self, log_dir):
         """Create a summary writer logging to log_dir."""
         self.writer = tf.compat.v1.summary.FileWriter(log_dir)
@@ -27,16 +26,16 @@ class TensorboardLogger:
             scipy.misc.toimage(img).save(s, format="png")
 
             # Create an Image object
-            img_sum = tf.Summary.Image(encoded_image_string=s.getvalue(),
-                                       height=img.shape[0],
-                                       width=img.shape[1])
+            img_sum = tf.Summary.Image(
+                encoded_image_string=s.getvalue(), height=img.shape[0], width=img.shape[1]
+            )
             # Create a Summary value
-            img_summaries.append(tf.Summary.Value(tag=f'{tag}/{i}', image=img_sum))
+            img_summaries.append(tf.Summary.Value(tag=f"{tag}/{i}", image=img_sum))
 
         # Create and write Summary
         summary = tf.Summary(value=img_summaries)
         self.writer.add_summary(summary, step)
-        
+
     def histo_summary(self, tag, values, step, bins=1000):
         """Log a histogram of the tensor of values."""
 
@@ -49,7 +48,7 @@ class TensorboardLogger:
         hist.max = float(np.max(values))
         hist.num = int(np.prod(values.shape))
         hist.sum = float(np.sum(values))
-        hist.sum_squares = float(np.sum(values**2))
+        hist.sum_squares = float(np.sum(values ** 2))
 
         # Drop the start of the first bin
         bin_edges = bin_edges[1:]

@@ -39,7 +39,7 @@ class ToTensor:
         return tf.to_tensor(img), tf.to_tensor(mask)
 
     def __repr__(self):
-        return self.__class__.__name__ + '()'
+        return self.__class__.__name__ + "()"
 
 
 class Normalize:

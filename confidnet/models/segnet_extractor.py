@@ -8,10 +8,10 @@ from confidnet.models.segnet import segnetDown2, segnetDown3, segnetUp2, segnetU
 class SegnetExtractor(AbstractModel):
     def __init__(self, config_args, device):
         super().__init__(config_args, device)
-        self.in_channels = config_args['data']['input_channels']
-        self.n_classes = config_args['data']['num_classes']
+        self.in_channels = config_args["data"]["input_channels"]
+        self.n_classes = config_args["data"]["num_classes"]
         self.is_unpooling = True
-        self.dropout = config_args['model']['is_dropout']
+        self.dropout = config_args["model"]["is_dropout"]
 
         self.down1 = segnetDown2(self.in_channels, 64)
         self.down2 = segnetDown2(64, 128)
@@ -29,7 +29,7 @@ class SegnetExtractor(AbstractModel):
         self.up3 = segnetUp3(256, 128)
         self.dropout_up3 = nn.Dropout(0.3)
         self.up2 = segnetUp2(128, 64)
-        self.last_unpool= nn.MaxUnpool2d(2, 2)
+        self.last_unpool = nn.MaxUnpool2d(2, 2)
 
     def forward(self, inputs):
 

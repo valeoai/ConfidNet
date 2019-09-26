@@ -7,13 +7,13 @@ from confidnet.models.model import AbstractModel
 class SmallConvNetMNISTSelfConfidClassic(AbstractModel):
     def __init__(self, config_args, device):
         super().__init__(config_args, device)
-        self.conv1 = nn.Conv2d(config_args['data']['input_channels'], 32, 3)
+        self.conv1 = nn.Conv2d(config_args["data"]["input_channels"], 32, 3)
         self.conv2 = nn.Conv2d(32, 64, 3)
         self.maxpool = nn.MaxPool2d(2)
         self.dropout1 = nn.Dropout(0.25)
         self.fc1 = nn.Linear(9216, 128)
         self.dropout2 = nn.Dropout(0.5)
-        self.fc2 = nn.Linear(128, config_args['data']['num_classes'])
+        self.fc2 = nn.Linear(128, config_args["data"]["num_classes"])
         self.uncertainty1 = nn.Linear(128, 400)
         self.uncertainty2 = nn.Linear(400, 400)
         self.uncertainty3 = nn.Linear(400, 400)

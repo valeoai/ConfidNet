@@ -3,7 +3,7 @@ from torch.optim.lr_scheduler import _LRScheduler
 
 from confidnet.utils.logger import get_logger
 
-LOGGER = get_logger(__name__, level='DEBUG')
+LOGGER = get_logger(__name__, level="DEBUG")
 
 
 class ConstantLR(_LRScheduler):
@@ -56,12 +56,13 @@ class WarmUpLR(_LRScheduler):
 
         return cold_lrs
 
+
 SCHEDULERS = {
-    'constant_lr': ConstantLR,
-    'poly_lr': PolynomialLR,
-    'multi_step': MultiStepLR,
-    'cosine_annealing': CosineAnnealingLR,
-    'exp_lr': ExponentialLR,
+    "constant_lr": ConstantLR,
+    "poly_lr": PolynomialLR,
+    "multi_step": MultiStepLR,
+    "cosine_annealing": CosineAnnealingLR,
+    "exp_lr": ExponentialLR,
 }
 
 
@@ -74,7 +75,7 @@ def get_scheduler(optimizer, scheduler_dict, start_epoch):
     scheduler_dict.pop("name")
 
     # Add last epoch
-    scheduler_dict['last_epoch'] = start_epoch
+    scheduler_dict["last_epoch"] = start_epoch
 
     LOGGER.info(f"Using {s_type} scheduler with {scheduler_dict} params")
 

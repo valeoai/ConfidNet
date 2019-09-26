@@ -8,10 +8,10 @@ from confidnet.models.segnet import segnetDown2, segnetDown3, segnetUp2, segnetU
 class SegNetOODConfid(AbstractModel):
     def __init__(self, config_args, device):
         super().__init__(config_args, device)
-        self.in_channels = config_args['data']['input_channels']
-        self.n_classes = config_args['data']['num_classes']
+        self.in_channels = config_args["data"]["input_channels"]
+        self.n_classes = config_args["data"]["num_classes"]
         self.is_unpooling = True
-        self.dropout = config_args['model']['is_dropout']
+        self.dropout = config_args["model"]["is_dropout"]
 
         self.down1 = segnetDown2(self.in_channels, 64)
         self.down2 = segnetDown2(64, 128)
@@ -30,8 +30,8 @@ class SegNetOODConfid(AbstractModel):
         self.dropout_up3 = nn.Dropout(0.3)
         self.up2 = segnetUp2(128, 64)
         self.up1 = segnetUp2(64, self.n_classes)
-        
-        self.unpool_uncertainty = nn.MaxUnpool2d(2,2)
+
+        self.unpool_uncertainty = nn.MaxUnpool2d(2, 2)
         self.uncertainty = nn.Conv2d(64, 1, 3, 1, 1)
 
     def forward(self, inputs):

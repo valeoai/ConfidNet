@@ -8,13 +8,15 @@ from sklearn.neighbors import KNeighborsClassifier
 
 from confidnet.utils.logger import get_logger
 
-LOGGER = get_logger(__name__, level='DEBUG')
+LOGGER = get_logger(__name__, level="DEBUG")
+
 
 class TrustScore:
     """
     Trust Score: a measure of classifier uncertainty based on nearest neighbors.
     """
-    def __init__(self, k=10, alpha=0., filtering="none", min_dist=1e-12, num_workers=1):
+
+    def __init__(self, k=10, alpha=0.0, filtering="none", min_dist=1e-12, num_workers=1):
         """
             k and alpha are the tuning parameters for the filtering,
             filtering: method of filtering. option are "none", "density",
@@ -25,7 +27,7 @@ class TrustScore:
         self.filtering = filtering
         self.alpha = alpha
         self.min_dist = min_dist
-        self.num_workers = num_workers 
+        self.num_workers = num_workers
 
     def filter_by_density(self, X):
         """Filter out points with low kNN density.
@@ -79,7 +81,9 @@ class TrustScore:
                 self.kdtrees[label] = KDTree(X_to_use)
 
             if len(X_to_use) == 0:
-                print("Filtered too much or missing examples from a label! Please lower alpha or check data.")
+                print(
+                    "Filtered too much or missing examples from a label! Please lower alpha or check data."
+                )
 
     def get_score(self, X, y_pred):
         """Compute the trust scores.
@@ -92,36 +96,39 @@ class TrustScore:
         the predicted class to the distance to the predicted class.
         """
         d = np.tile(None, (X.shape[0], self.n_labels))
-        
-        if self.num_workers<2:
-            LOGGER.warning('Using single processing for computing trust scores')
+
+        if self.num_workers < 2:
+            LOGGER.warning("Using single processing for computing trust scores")
             for label_idx in range(self.n_labels):
                 t0 = time.time()
                 d[:, label_idx] = self.kdtrees[label_idx].query(X, k=2)[0][:, -1]
-                print(f'KDTree for label {label_idx} run in {time.time() - t0} secondes')
+                print(f"KDTree for label {label_idx} run in {time.time() - t0} secondes")
         else:
-            LOGGER.warning(f'Enabling multiprocessing with {self.num_workers} workers for computing trust scores')
+            LOGGER.warning(
+                f"Enabling multiprocessing with {self.num_workers} workers for computing trust scores"
+            )
             self.current_X = X
-            pool = multiprocessing.Pool(self.num_workers)    
+            pool = multiprocessing.Pool(self.num_workers)
             d = pool.map(self.process_d, range(self.n_labels))
             d = np.array(d).T
 
         sorted_d = np.sort(d, axis=1)
         d_to_pred = d[range(d.shape[0]), y_pred]
-        d_to_closest_not_pred = np.where(sorted_d[:, 0] != d_to_pred,
-                                         sorted_d[:, 0], sorted_d[:, 1])
+        d_to_closest_not_pred = np.where(
+            sorted_d[:, 0] != d_to_pred, sorted_d[:, 0], sorted_d[:, 1]
+        )
         return d_to_closest_not_pred / (d_to_pred + self.min_dist)
 
-    
     def process_d(self, label_idx):
         t0 = time.time()
         a = self.kdtrees[label_idx].query(self.current_X, k=2)[0][:, -1]
-        print('KDTree for label %d run in %ls secondes' % (label_idx, time.time() - t0))
+        print("KDTree for label %d run in %ls secondes" % (label_idx, time.time() - t0))
         return a
-        
+
     class KNNConfidence:
         """Baseline which uses disagreement to kNN classifier.
         """
+
         def __init__(self, k=10):
             self.k = k
 

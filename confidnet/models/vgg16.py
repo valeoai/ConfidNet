@@ -6,21 +6,25 @@ from confidnet.models.model import AbstractModel
 
 
 class Conv2dSame(nn.Module):
-    def __init__(self, in_channels, out_channels, kernel_size, bias=True, padding_layer=nn.ReflectionPad2d):
+    def __init__(
+        self, in_channels, out_channels, kernel_size, bias=True, padding_layer=nn.ReflectionPad2d
+    ):
         super().__init__()
         ka = kernel_size // 2
         kb = ka - 1 if kernel_size % 2 == 0 else ka
         self.net = nn.Sequential(
-            padding_layer((ka,kb,ka,kb)),
-            nn.Conv2d(in_channels, out_channels, kernel_size, bias=bias)
+            padding_layer((ka, kb, ka, kb)),
+            nn.Conv2d(in_channels, out_channels, kernel_size, bias=bias),
         )
+
     def forward(self, x):
         return self.net(x)
+
 
 class VGG16(AbstractModel):
     def __init__(self, config_args, device):
         super().__init__(config_args, device)
-        self.conv1 = Conv2dSame(config_args['data']['input_channels'], 64, 3)
+        self.conv1 = Conv2dSame(config_args["data"]["input_channels"], 64, 3)
         self.conv1_bn = nn.BatchNorm2d(64)
         self.conv1_dropout = nn.Dropout(0.3)
         self.conv2 = Conv2dSame(64, 64, 3)
@@ -68,7 +72,7 @@ class VGG16(AbstractModel):
 
         self.fc1 = nn.Linear(512, 512)
         self.dropout_fc = nn.Dropout(0.5)
-        self.fc2 = nn.Linear(512, config_args['data']['num_classes'])
+        self.fc2 = nn.Linear(512, config_args["data"]["num_classes"])
 
     def forward(self, x):
         out = F.relu(self.conv1(x))
@@ -159,8 +163,21 @@ class VGG16(AbstractModel):
             if isinstance(_layer, nn.Conv2d):
                 vgg_layers.append(_layer)
 
-        model_layers = [self.conv1, self.conv2, self.conv3, self.conv4, self.conv5, self.conv6, self.conv7,
-                        self.conv8, self.conv9, self.conv10, self.conv11, self.conv12, self.conv13]
+        model_layers = [
+            self.conv1,
+            self.conv2,
+            self.conv3,
+            self.conv4,
+            self.conv5,
+            self.conv6,
+            self.conv7,
+            self.conv8,
+            self.conv9,
+            self.conv10,
+            self.conv11,
+            self.conv12,
+            self.conv13,
+        ]
 
         assert len(vgg_layers) == len(model_layers)
 

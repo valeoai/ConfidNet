@@ -40,6 +40,7 @@ class conv2DBatchNormRelu(nn.Module):
         outputs = self.cbr_unit(inputs)
         return outputs
 
+
 class segnetDown2(nn.Module):
     def __init__(self, in_size, out_size):
         super().__init__()
@@ -101,13 +102,14 @@ class segnetUp3(nn.Module):
         outputs = self.conv3(outputs)
         return outputs
 
+
 class Segnet(AbstractModel):
     def __init__(self, config_args, device):
         super().__init__(config_args, device)
-        self.in_channels = config_args['data']['input_channels']
-        self.n_classes = config_args['data']['num_classes']
+        self.in_channels = config_args["data"]["input_channels"]
+        self.n_classes = config_args["data"]["num_classes"]
         self.is_unpooling = True
-        self.dropout = config_args['model']['is_dropout']
+        self.dropout = config_args["model"]["is_dropout"]
 
         self.down1 = segnetDown2(self.in_channels, 64)
         self.down2 = segnetDown2(64, 128)
@@ -149,7 +151,7 @@ class Segnet(AbstractModel):
                 down5 = F.dropout(down5, 0.5, training=self.training)
             else:
                 down5 = self.dropout_down5(down5)
-            
+
         up5 = self.up5(down5, indices_5, unpool_shape5)
         if self.dropout:
             if self.mc_dropout:

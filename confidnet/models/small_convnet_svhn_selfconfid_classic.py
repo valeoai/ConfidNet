@@ -8,8 +8,8 @@ from confidnet.models.small_convnet_svhn import Conv2dSame
 class SmallConvNetSVHNSelfConfidClassic(AbstractModel):
     def __init__(self, config_args, device):
         super().__init__(config_args, device)
-        self.feature_dim = config_args['model']['feature_dim']
-        self.conv1 = Conv2dSame(config_args['data']['input_channels'], 32, 3)
+        self.feature_dim = config_args["model"]["feature_dim"]
+        self.conv1 = Conv2dSame(config_args["data"]["input_channels"], 32, 3)
         self.conv1_bn = nn.BatchNorm2d(32)
         self.conv2 = Conv2dSame(32, 32, 3)
         self.conv2_bn = nn.BatchNorm2d(32)
@@ -32,7 +32,7 @@ class SmallConvNetSVHNSelfConfidClassic(AbstractModel):
 
         self.fc1 = nn.Linear(2048, self.feature_dim)
         self.dropout4 = nn.Dropout(0.3)
-        self.fc2 = nn.Linear(self.feature_dim, config_args['data']['num_classes'])
+        self.fc2 = nn.Linear(self.feature_dim, config_args["data"]["num_classes"])
 
         self.uncertainty1 = nn.Linear(self.feature_dim, 400)
         self.uncertainty2 = nn.Linear(400, 400)

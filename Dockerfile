@@ -7,13 +7,15 @@ RUN bash miniconda.sh -b -p /opt/conda && \
 ENV PATH="/opt/conda/bin:${PATH}"
 RUN conda config --set always_yes yes
 
-RUN conda install pytorch=1.0.1 torchvision cudatoolkit=10.0 -c pytorch
+RUN conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
 RUN pip install tensorflow torchsummary pyyaml verboselogs coloredlogs future
 
 COPY ./ ./ConfidNet
 RUN pip install -e ./ConfidNet
 
-WORKDIR ./ConfidNet
-
+# checks.
 RUN python -c "import confidnet"
-RUN python -c "from confidnet import structured_map_ranking_loss"
+RUN python -c "import torch; from confidnet import structured_map_ranking_loss"
+
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=all

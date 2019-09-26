@@ -1,6 +1,5 @@
 import os
 import argparse
-import yaml
 import numpy as np
 from tqdm import tqdm
 import torch
@@ -11,6 +10,8 @@ from confidnet.models import get_model
 from confidnet.utils import trust_scores
 from confidnet.utils.metrics import Metrics
 from confidnet.utils.logger import get_logger
+from confidnet.utils.misc import load_yaml
+
 LOGGER = get_logger(__name__, level='DEBUG')
 
 MODE_TYPE = ['normal', 'gt', 'mc_dropout', 'trust_score', 'self_confid']
@@ -25,8 +26,7 @@ def main():
     parser.add_argument('--no-cuda', action='store_true', default=False, help='disables CUDA training')
     args = parser.parse_args()
 
-    with open(args.config_path, 'r') as f:
-        config_args = yaml.load(f, Loader=yaml.SafeLoader)
+    config_args = load_yaml(args.config_path)
     config_args['training']['metrics'] = ['accuracy', 'auc', 'ap_success', 'ap_errors', 'fpr_at_95tpr']
     if config_args['training']['task'] == 'segmentation':
         config_args['training']['metrics'].append('mean_iou')

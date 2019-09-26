@@ -1,6 +1,8 @@
 import os
 import csv
 import torch
+import yaml
+from pathlib import Path
 
 
 def one_hot_embedding(labels, num_classes):
@@ -40,3 +42,12 @@ def print_dict(logs_dict):
     for metr_name in logs_dict:
         str_print+='{}={},  '.format(metr_name, logs_dict[metr_name]['string'])
     print (str_print)
+
+
+def load_yaml(path):
+    with open(path, 'r') as f:
+        config_args = yaml.load(f, Loader=yaml.SafeLoader)
+
+    config_args['data']['data_dir'] = Path(config_args['data']['data_dir'])
+    config_args['training']['output_folder'] = Path(config_args['training']['output_folder'])
+    return config_args

@@ -2,13 +2,14 @@ import argparse
 import os
 from shutil import copyfile
 import click
-import yaml
 import torch
 
 from confidnet.loaders import get_loader_class
 from confidnet.learners import get_learner
 from confidnet.utils.tensorboard_logger import TensorboardLogger
 from confidnet.utils.logger import get_logger
+from confidnet.utils.misc import load_yaml
+
 LOGGER = get_logger(__name__, level='DEBUG')
 
 
@@ -19,9 +20,7 @@ def main():
     parser.add_argument('--from_scratch', '-f', action='store_true', default=False, help='Force training from scratch')
     args = parser.parse_args()
 
-    with open(args.config_path, 'r') as f:
-        config_args = yaml.load(f, Loader=yaml.SafeLoader)
-
+    config_args = load_yaml(args.config_path)
     # Device configuration
     device = torch.device('cuda' if torch.cuda.is_available() and not args.no_cuda else 'cpu')
 

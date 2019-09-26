@@ -14,8 +14,5 @@ def get_loader(config_args):
         'svhn': dload.SVHNLoader,
         'camvid': dload.CamVidLoader
     }
-    
-    if config_args['data']['dataset'].lower() not in data_loader_factory:
-        raise Exception("Dataset {} non existing".format(config_args['data']['dataset']))
 
     return data_loader_factory[config_args['data']['dataset']](config_args=config_args)

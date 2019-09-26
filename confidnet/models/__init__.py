@@ -29,7 +29,7 @@ def get_model(config_args, device):
     """
         Return a new instance of model
     """
-    
+
     # Available models
     model_factory = {
         "mlp": MLP,
@@ -58,8 +58,5 @@ def get_model(config_args, device):
         "segnet_selfconfid_cloning": SegnetSelfConfidCloning,
         "segnet_oodconfid": SegNetOODConfid
     }
-    
-    if config_args['model']['name'].lower() not in model_factory:
-        raise Exception("Model {} non existing".format(config_args['model']['name']))
-        
+
     return model_factory[config_args['model']['name']](config_args=config_args, device=device)

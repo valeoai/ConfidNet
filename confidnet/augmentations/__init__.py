@@ -35,7 +35,7 @@ def get_composed_augmentations(aug_dict, verbose=True, training='classif'):
     elif training == 'segmentation':
         aug_type = SEGMENTATION_AUGMENTATION
     else:
-        raise Exception(f"Augmentation dict {training} non existing")
+        raise KeyError(f"Augmentation dict {training} non existing")
 
     if aug_dict is None:
         LOGGER.info('Using No Augmentations')

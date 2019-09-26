@@ -14,8 +14,6 @@ LOGGER = get_logger(__name__, level="DEBUG")
 
 
 class OODConfidLearner(AbstractLeaner):
-    def __init__(self, config_args, train_loader, val_loader, test_loader, start_epoch, device):
-        super().__init__(config_args, train_loader, val_loader, test_loader, start_epoch, device)
 
     def train(self, epoch):
         self.model.train()

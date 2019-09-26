@@ -18,7 +18,7 @@ class OODConfidLearner(AbstractLeaner):
     def train(self, epoch):
         self.model.train()
         metrics = Metrics(
-            self.metrics, self.prod_train_len, self.config_args["data"]["num_classes"]
+            self.metrics, self.prod_train_len, self.num_classes
         )
         loss, nll_loss, confid_loss = 0, 0, 0
         len_steps, len_data = 0, 0
@@ -137,7 +137,7 @@ class OODConfidLearner(AbstractLeaner):
 
     def evaluate(self, dloader, len_dataset, split="test", verbose=False, **args):
         self.model.eval()
-        metrics = Metrics(self.metrics, len_dataset, self.config_args["data"]["num_classes"])
+        metrics = Metrics(self.metrics, len_dataset, self.num_classes)
         loss, nll_loss, confid_loss = 0, 0, 0
 
         # Evaluation loop

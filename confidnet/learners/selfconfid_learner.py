@@ -27,7 +27,7 @@ class SelfConfidLearner(AbstractLeaner):
         if self.config_args["model"].get("uncertainty", None):
             self.disable_dropout()
         metrics = Metrics(
-            self.metrics, self.prod_train_len, self.config_args["data"]["num_classes"]
+            self.metrics, self.prod_train_len, self.num_classes
         )
         loss, confid_loss = 0, 0
         len_steps, len_data = 0, 0
@@ -122,7 +122,7 @@ class SelfConfidLearner(AbstractLeaner):
 
     def evaluate(self, dloader, len_dataset, split="test", verbose=False, **args):
         self.model.eval()
-        metrics = Metrics(self.metrics, len_dataset, self.config_args["data"]["num_classes"])
+        metrics = Metrics(self.metrics, len_dataset, self.num_classes)
         loss = 0
 
         # Evaluation loop

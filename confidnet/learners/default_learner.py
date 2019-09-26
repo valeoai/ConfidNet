@@ -19,7 +19,7 @@ class DefaultLearner(AbstractLeaner):
     def train(self, epoch):
         self.model.train()
         metrics = Metrics(
-            self.metrics, self.prod_train_len, self.config_args["data"]["num_classes"]
+            self.metrics, self.prod_train_len, self.num_classes
         )
         loss, len_steps, len_data = 0, 0, 0
 
@@ -116,7 +116,7 @@ class DefaultLearner(AbstractLeaner):
         self, dloader, len_dataset, split="test", mode="normal", samples=50, verbose=False
     ):
         self.model.eval()
-        metrics = Metrics(self.metrics, len_dataset, self.config_args["data"]["num_classes"])
+        metrics = Metrics(self.metrics, len_dataset, self.num_classes)
         loss = 0
 
         # Special case of mc-dropout
@@ -147,7 +147,7 @@ class DefaultLearner(AbstractLeaner):
                     probs = F.softmax(output, dim=1)
                     pred = probs.max(dim=1, keepdim=True)[1]
                     labels_hot = misc.one_hot_embedding(
-                        target, self.config_args["data"]["num_classes"]
+                        target, self.num_classes
                     ).to(self.device)
                     # Segmentation special case
                     if self.task == "segmentation":
@@ -157,13 +157,13 @@ class DefaultLearner(AbstractLeaner):
                 elif mode == "mc_dropout":
                     if self.task == "classification":
                         outputs = torch.zeros(
-                            samples, data.shape[0], self.config_args["data"]["num_classes"]
+                            samples, data.shape[0], self.num_classes
                         ).to(self.device)
                     elif self.task == "segmentation":
                         outputs = torch.zeros(
                             samples,
                             data.shape[0],
-                            self.config_args["data"]["num_classes"],
+                            self.num_classes,
                             data.shape[2],
                             data.shape[3],
                         ).to(self.device)

@@ -14,6 +14,7 @@ LOGGER = get_logger(__name__, level="DEBUG")
 class AbstractLeaner:
     def __init__(self, config_args, train_loader, val_loader, test_loader, start_epoch, device):
         self.config_args = config_args
+        self.num_classes = config_args['data']['num_classes']
         self.task = config_args["training"]["task"]
         self.loss_args = config_args["training"]["loss"]
         self.metrics = config_args["training"]["metrics"]

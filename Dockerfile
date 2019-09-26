@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 as base_image
+FROM ubuntu:18.04
 
 RUN apt-get update && apt-get install -y wget bzip2 gcc g++
 RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
@@ -7,7 +7,7 @@ RUN bash miniconda.sh -b -p /opt/conda && \
 ENV PATH="/opt/conda/bin:${PATH}"
 RUN conda config --set always_yes yes
 
-RUN conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
+RUN conda install pytorch=1.0.1 torchvision cudatoolkit=10.0 -c pytorch
 RUN pip install tensorflow torchsummary pyyaml verboselogs coloredlogs future
 
 COPY ./ ./ConfidNet

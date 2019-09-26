@@ -98,7 +98,7 @@ class SelfConfidLearner(AbstractLeaner):
         self.save_checkpoint(epoch)
 
         # CSV logging
-        misc.csv_writter(path=os.path.join(self.output_folder, 'logs.csv'), dic=OrderedDict(logs_dict))
+        misc.csv_writter(path=self.output_folder / 'logs.csv', dic=OrderedDict(logs_dict))
         
         # Tensorboard logging
         self.save_tb(logs_dict)

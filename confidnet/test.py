@@ -50,7 +50,7 @@ def main():
     learner = get_learner(config_args, dloader.train_loader, dloader.val_loader, dloader.test_loader, -1, device)
 
     # Initialize and load model
-    ckpt_path = os.path.join(config_args['training']['output_folder'], f'model_epoch_{args.epoch:03d}.ckpt')
+    ckpt_path = config_args['training']['output_folder'] / f'model_epoch_{args.epoch:03d}.ckpt'
     checkpoint = torch.load(ckpt_path)
     learner.model.load_state_dict(checkpoint['model_state_dict'])
 

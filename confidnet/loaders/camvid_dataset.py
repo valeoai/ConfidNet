@@ -83,8 +83,8 @@ class CamvidDataset(data.Dataset):
         return len(self.image_list)
 
     def read_lists(self):
-        image_path = os.path.join(self.data_dir, self.split + '.txt')
-        assert os.path.exists(image_path)
+        image_path = self.data_dir / (self.split + '.txt')
+        assert image_path.exists()
         self.image_list = [line.strip().split()[0] for line in open(image_path, 'r')]
         self.label_list = [line.strip().split()[1] for line in open(image_path, 'r')]
         print(f'fetched {len(self.image_list)} images from text file')

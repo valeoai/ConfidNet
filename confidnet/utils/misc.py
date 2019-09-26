@@ -21,7 +21,7 @@ def one_hot_embedding(labels, num_classes):
 
 def csv_writter(path, dic):       
     # Check if the file already exists
-    if os.path.isfile(path):
+    if path.is_file():
         append_mode = True
         rw_mode = 'a'
     else:

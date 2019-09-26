@@ -89,7 +89,7 @@ class AbstractLeaner:
 			'model_state_dict': self.model.module.state_dict() if isinstance(self.model, torch.nn.DataParallel)
 			else self.model.state_dict(),
 			'optimizer_state_dict': self.optimizer.state_dict(),
-			}, os.path.join(self.output_folder, f'model_epoch_{epoch:03d}.ckpt'))
+			}, self.output_folder / f'model_epoch_{epoch:03d}.ckpt')
 
 	def save_tb(self, logs_dict):
 		# ================================================================== #

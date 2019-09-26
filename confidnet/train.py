@@ -25,7 +25,7 @@ def main():
     device = torch.device('cuda' if torch.cuda.is_available() and not args.no_cuda else 'cpu')
 
     # Start from scatch or resume existing model and optim
-    if os.path.exists(config_args['training']['output_folder']):
+    if config_args['training']['output_folder'].exists():
         list_previous_ckpt = sorted([f for f in os.listdir(config_args['training']['output_folder'])
                                      if 'model_epoch' in f])
         if args.from_scratch or not list_previous_ckpt:
@@ -37,7 +37,7 @@ def main():
             start_epoch = 1
         else:
             last_ckpt = list_previous_ckpt[-1]
-            checkpoint = torch.load(os.path.join(config_args['training']['output_folder'], f'{last_ckpt}'))
+            checkpoint = torch.load(config_args['training']['output_folder'] / str(last_ckpt))
             start_epoch = checkpoint['epoch']+1
     else:
         LOGGER.info('Starting from scratch')
@@ -79,7 +79,7 @@ def main():
     LOGGER.info('Using model {}'.format(config_args['model']['name']))
     learner.model.print_summary(input_size=tuple([shape_i for shape_i in learner.train_loader.dataset[0][0].shape]))
     learner.tb_logger = TensorboardLogger(config_args['training']['output_folder'])
-    copyfile(args.config_path, os.path.join(config_args['training']['output_folder'],f'config_{start_epoch}.yaml'))
+    copyfile(args.config_path, config_args['training']['output_folder'] / f'config_{start_epoch}.yaml')
     LOGGER.info('Sending batches as {}'.format(tuple([config_args['training']['batch_size']]
                                                      + [shape_i for shape_i
                                                         in learner.train_loader.dataset[0][0].shape])))

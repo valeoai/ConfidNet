@@ -44,6 +44,7 @@ You can take a look at the [Dockerfile](./Dockerfile) if you are uncertain about
 #### Datasets
 
 MNIST, SVHN, CIFAR-10 and CIFAR-100 datasets are managed by Pytorch dataloader. First time you run a script, the dataloader will download the dataset in ```confidnet/data/datasetname-data```.
+
 ## Running the code
 
 ### Training
@@ -54,4 +55,5 @@ python3 train.py -c confs/your_config_file.yaml
 ### Testing
 ```
 python3 test.py -c confs/your_config_file.yaml -e NUM_EPOCHS
+
 ```

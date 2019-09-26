@@ -79,7 +79,6 @@ class AbstractLeaner:
 
 	def set_scheduler(self):
 		self.scheduler = get_scheduler(self.optimizer, self.lr_schedule, self.last_epoch)
-		self.scheduler.step()
 
 	def load_checkpoint(self, state_dict, strict=True):
 		self.model.load_state_dict(state_dict, strict=strict)

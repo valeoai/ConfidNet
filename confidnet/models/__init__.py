@@ -42,7 +42,7 @@ def get_model(config_args, device):
         'small_convnet_mnist_selfconfid_classic': SmallConvNetMNISTSelfConfidClassic,
         'small_convnet_mnist_selfconfid_cloning': SmallConvNetMNISTSelfConfidCloning,
         "small_convnet_mnist_oodconfid": SmallConvNetMNISTOODConfid,
-        'small_convnet_svhn_conv': SmallConvNetSVHN,
+        'small_convnet_svhn': SmallConvNetSVHN,
         'small_convnet_svhn_extractor': SmallConvNetSVHNExtractor,
         'small_convnet_svhn_selfconfid_classic': SmallConvNetSVHNSelfConfidClassic,
         'small_convnet_svhn_selfconfid_cloning': SmallConvNetSVHNSelfConfidCloning,
@@ -60,6 +60,6 @@ def get_model(config_args, device):
     }
     
     if config_args['model']['name'].lower() not in model_factory:
-        raise Exception("Model {} non existing".format(config_args['model_name']))
+        raise Exception("Model {} non existing".format(config_args['model']['name']))
         
     return model_factory[config_args['model']['name']](config_args=config_args, device=device)

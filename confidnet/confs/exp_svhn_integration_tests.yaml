@@ -1,7 +1,7 @@
 # Data parameters
 data:
     dataset: svhn
-    data_dir: data/svhn-data
+    data_dir: /svhn-data
     input_size: [32,32]
     input_channels: 3
     num_classes: 10
@@ -9,10 +9,10 @@ data:
 
 # Training parameters
 training:
-    output_folder: /share/DEEPLEARNING/ccorbiere/logs/cifar10/test/cifar10_trustscore_baseline_pretrained
+    output_folder: /output_dir
     task: classification
     learner: default
-    nb_epochs: 100
+    nb_epochs: 1
     batch_size: 128
     loss:
         name: cross_entropy

@@ -155,7 +155,7 @@ class SelfConfidLearner(AbstractLeaner):
         LOGGER.info('Freezing every layer except uncertainty')
         for param in self.model.named_parameters():
             if 'uncertainty' in param[0]:
-                print('{} kept to training'.format(param[0]))
+                print(param[0], 'kept to training')
                 continue
             param[1].requires_grad = False
 
@@ -166,7 +166,7 @@ class SelfConfidLearner(AbstractLeaner):
         for layer in self.model.named_modules():
             if 'bn' in layer[0] or 'cbr_unit.1' in layer[0]:
                 if verbose:
-                    print ('{} original BN setting'.format(layer[0]))
+                    print(layer[0], 'original BN setting')
                 layer[1].momentum = 0
                 layer[1].eval()
 
@@ -177,5 +177,5 @@ class SelfConfidLearner(AbstractLeaner):
         for layer in self.model.named_modules():
             if 'dropout' in layer[0]:
                 if verbose:
-                    print ('{} set to eval mode'.format(layer[0]))
+                    print(layer[0], 'set to eval mode')
                 layer[1].eval()

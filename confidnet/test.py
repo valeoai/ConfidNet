@@ -5,8 +5,8 @@ import numpy as np
 import torch
 from tqdm import tqdm
 
+from confidnet.loaders import get_loader
 from confidnet.learners import get_learner
-from confidnet.loaders import get_loader_class
 from confidnet.models import get_model
 from confidnet.utils import trust_scores
 from confidnet.utils.logger import get_logger
@@ -58,8 +58,8 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
 
     # Load dataset
-    LOGGER.info("Loading dataset {}".format(config_args["data"]["dataset"]))
-    dloader = get_loader_class(config_args["data"]["dataset"])(**config_args)
+    LOGGER.info('Loading dataset {}'.format(config_args['data']['dataset']))
+    dloader = get_loader(config_args)
 
     # Make loaders
     dloader.make_loaders()

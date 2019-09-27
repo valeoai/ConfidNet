@@ -15,7 +15,7 @@ from confidnet.utils.misc import load_yaml
 
 LOGGER = get_logger(__name__, level="DEBUG")
 
-MODE_TYPE = ["normal", "gt", "mc_dropout", "trust_score", "self_confid"]
+MODE_TYPE = ["normal", "gt", "mc_dropout", "trust_score", "confidnet"]
 MAX_NUMBER_TRUSTSCORE_SEG = 3000
 
 

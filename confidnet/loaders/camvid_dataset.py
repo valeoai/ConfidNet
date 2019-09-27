@@ -137,13 +137,10 @@ class CamvidDataset(data.Dataset):
     # input: torch.tensor
     # output: torch.tensor
     def unprocess_batch(self, input):
-        # if torch.is_tensor(input):
-        #     input = input.numpy()
 
         for i in range(input.size(1)):
             input[:, i, :, :] = self.std[i] * input[:, i, :, :]
             input[:, i, :, :] = input[:, i, :, :] + self.mean[i]
-            # input[:,i,:,:] = np.clip(input[:,i,:,:], 0, 1)
             input[:, i, :, :].clamp_(0, 1)
 
         return input

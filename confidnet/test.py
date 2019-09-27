@@ -40,6 +40,10 @@ def main():
     args = parser.parse_args()
 
     config_args = load_yaml(args.config_path)
+
+    # Overwrite for release
+    config_args["training"]["output_folder"] = os.path.dirname(args.config_path)
+
     config_args["training"]["metrics"] = [
         "accuracy",
         "auc",

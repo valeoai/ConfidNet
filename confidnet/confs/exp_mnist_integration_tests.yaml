@@ -1,0 +1,40 @@
+# Data parameters
+data:
+    dataset: mnist
+    data_dir: data/mnist-data
+    input_size: [28,28]
+    input_channels: 1
+    num_classes: 10
+    valid_size: 0.1
+
+# Training parameters
+training:
+    output_folder: /home/docker_user/shared/ccorbiere/mnist_pretrained/baseline
+    task: classification
+    learner: default
+    nb_epochs: 500
+    batch_size: 128
+    loss:
+        name: cross_entropy
+    optimizer:
+        name: sgd
+        lr: 0.001
+        momentum: 0.9
+        weight_decay: 0.0001
+    lr_schedule:
+    metrics: ['accuracy', 'auc', 'ap_success', 'ap_errors']
+    pin_memory: False
+    num_workers: 3
+    augmentations:
+        normalize: [[0.1307,], [0.3081,]]
+
+
+# Model parameters
+model:
+    name: small_convnet_mnist
+    resume:
+    hidden_size: 1200
+    dropout: False
+
+
+

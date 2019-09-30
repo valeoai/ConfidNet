@@ -54,10 +54,10 @@ class OODConfidLearner(AbstractLeaner):
             loop.set_postfix(
                 OrderedDict(
                     {
-                        "loss": "{:05.3e}".format(loss / len_data),
-                        "nll_loss": "{:05.3e}".format(nll_loss / len_data),
-                        "confid_loss": "{:05.3e}".format(confid_loss / len_data),
-                        "acc": "{:05.2%}".format(metrics.accuracy / len_steps),
+                        "loss": f"{(loss / len_data):05.3e}",
+                        "nll_loss": f"{(nll_loss / len_data):05.3e}",
+                        "confid_loss": f"{(confid_loss / len_data):05.3e}",
+                        "acc": f"{(metrics.accuracy / len_steps):05.2%}",
                     }
                 )
             )
@@ -70,15 +70,15 @@ class OODConfidLearner(AbstractLeaner):
                 "epoch": {"value": epoch, "string": f"{epoch:03}"},
                 "train/loss": {
                     "value": loss / len_data,
-                    "string": "{:05.4e}".format(loss / len_data),
+                    "string": f"{(loss / len_data):05.4e}",
                 },
                 "train/loss_nll": {
                     "value": nll_loss / len_data,
-                    "string": "{:05.4e}".format(nll_loss / len_data),
+                    "string": f"{(nll_loss / len_data):05.4e}",
                 },
                 "train/loss_confid": {
                     "value": confid_loss / len_data,
-                    "string": "{:05.4e}".format(confid_loss / len_data),
+                    "string": f"{(confid_loss / len_data):05.4e}",
                 },
             }
         )
@@ -89,15 +89,15 @@ class OODConfidLearner(AbstractLeaner):
         val_losses, scores_val = self.evaluate(self.val_loader, self.prod_val_len, split="val")
         logs_dict["val/loss"] = {
             "value": val_losses["loss"].item() / self.nsamples_val,
-            "string": "{:05.4e}".format(val_losses["loss"].item() / self.nsamples_val),
+            "string": f"{(val_losses['loss'].item() / self.nsamples_val):05.4e}",
         }
         logs_dict["val/loss_nll"] = {
             "value": val_losses["loss_nll"].item() / self.nsamples_val,
-            "string": "{:05.4e}".format(val_losses["loss_nll"].item() / self.nsamples_val),
+            "string": f"{(val_losses['loss_nll'].item() / self.nsamples_val):05.4e}",
         }
         logs_dict["val/loss_confid"] = {
             "value": val_losses["loss_confid"].item() / self.nsamples_val,
-            "string": "{:05.4e}".format(val_losses["loss_confid"].item() / self.nsamples_val),
+            "string": f"{(val_losses['loss_confid'].item() / self.nsamples_val):05.4e}",
         }
         for sv in scores_val:
             logs_dict[sv] = scores_val[sv]
@@ -106,15 +106,15 @@ class OODConfidLearner(AbstractLeaner):
         test_losses, scores_test = self.evaluate(self.test_loader, self.prod_test_len, split="test")
         logs_dict["test/loss"] = {
             "value": test_losses["loss"].item() / self.nsamples_test,
-            "string": "{:05.4e}".format(test_losses["loss"].item() / self.nsamples_test),
+            "string": f"{(test_losses['loss'].item() / self.nsamples_test):05.4e}",
         }
         logs_dict["test/loss_nll"] = {
             "value": test_losses["loss_nll"].item() / self.nsamples_test,
-            "string": "{:05.4e}".format(test_losses["loss_nll"].item() / self.nsamples_test),
+            "string": f"{(test_losses['loss_nll'].item() / self.nsamples_test):05.4e}",
         }
         logs_dict["test/loss_confid"] = {
             "value": test_losses["loss_confid"].item() / self.nsamples_test,
-            "string": "{:05.4e}".format(test_losses["loss_confid"].item() / self.nsamples_test),
+            "string": f"{(test_losses['loss_confid'].item() / self.nsamples_test):05.4e}",
         }
         for st in scores_test:
             logs_dict[st] = scores_test[st]

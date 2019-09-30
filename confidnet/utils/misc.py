@@ -41,7 +41,7 @@ def csv_writter(path, dic):
 def print_dict(logs_dict):
     str_print = ""
     for metr_name in logs_dict:
-        str_print += "{}={},  ".format(metr_name, logs_dict[metr_name]["string"])
+        str_print += f"{metr_name}={logs_dict[metr_name]['string']},  "
     print(str_print)
 
 

@@ -62,14 +62,14 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu")
 
     # Load dataset
-    LOGGER.info('Loading dataset {}'.format(config_args['data']['dataset']))
+    LOGGER.info(f"Loading dataset {config_args['data']['dataset']}")
     dloader = get_loader(config_args)
 
     # Make loaders
     dloader.make_loaders()
 
     # Set learner
-    LOGGER.warning("Learning type: {}".format(config_args["training"]["learner"]))
+    LOGGER.warning(f"Learning type: {config_args['training']['learner']}")
     learner = get_learner(
         config_args, dloader.train_loader, dloader.val_loader, dloader.test_loader, -1, device
     )
@@ -104,7 +104,7 @@ def main():
         config_args["model"]["name"] = config_args["model"]["name"] + "_extractor"
         features_extractor = get_model(config_args, device).to(device)
         features_extractor.load_state_dict(learner.model.state_dict(), strict=False)
-        LOGGER.info("Using extractor {}".format(config_args["model"]["name"]))
+        LOGGER.info(f"Using extractor {config_args['model']['name']}")
         features_extractor.print_summary(
             input_size=tuple([shape_i for shape_i in learner.train_loader.dataset[0][0].shape])
         )

@@ -69,8 +69,8 @@ class SelfConfidLearner(AbstractLeaner):
             loop.set_postfix(
                 OrderedDict(
                     {
-                        "loss_confid": "{:05.3e}".format(loss / len_data),
-                        "acc": "{:05.2%}".format(metrics.accuracy / len_steps),
+                        "loss_confid": f"{(loss / len_data):05.3e}",
+                        "acc": f"{(metrics.accuracy / len_steps):05.2%}",
                     }
                 )
             )
@@ -83,7 +83,7 @@ class SelfConfidLearner(AbstractLeaner):
                 "epoch": {"value": epoch, "string": f"{epoch:03}"},
                 "train/loss_confid": {
                     "value": loss / len_data,
-                    "string": "{:05.4e}".format(loss / len_data),
+                    "string": f"{(loss / len_data):05.4e}",
                 },
             }
         )
@@ -94,7 +94,7 @@ class SelfConfidLearner(AbstractLeaner):
         val_losses, scores_val = self.evaluate(self.val_loader, self.prod_val_len, split="val")
         logs_dict["val/loss_confid"] = {
             "value": val_losses["loss_confid"].item() / self.nsamples_val,
-            "string": "{:05.4e}".format(val_losses["loss_confid"].item() / self.nsamples_val),
+            "string": f"{(val_losses['loss_confid'].item() / self.nsamples_val):05.4e}",
         }
         for sv in scores_val:
             logs_dict[sv] = scores_val[sv]
@@ -103,7 +103,7 @@ class SelfConfidLearner(AbstractLeaner):
         test_losses, scores_test = self.evaluate(self.test_loader, self.prod_test_len, split="test")
         logs_dict["test/loss_confid"] = {
             "value": test_losses["loss_confid"].item() / self.nsamples_test,
-            "string": "{:05.4e}".format(test_losses["loss_confid"].item() / self.nsamples_test),
+            "string": f"{(test_losses['loss_confid'].item() / self.nsamples_test):05.4e}",
         }
         for st in scores_test:
             logs_dict[st] = scores_test[st]

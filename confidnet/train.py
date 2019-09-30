@@ -59,14 +59,14 @@ def main():
         start_epoch = 1
 
     # Load dataset
-    LOGGER.info('Loading dataset {}'.format(config_args['data']['dataset']))
+    LOGGER.info(f"Loading dataset {config_args['data']['dataset']}")
     dloader = get_loader(config_args)
 
     # Make loaders
     dloader.make_loaders()
 
     # Set learner
-    LOGGER.warning("Learning type: {}".format(config_args["training"]["learner"]))
+    LOGGER.warning(f"Learning type: {config_args['training']['learner']}")
     learner = get_learner(
         config_args,
         dloader.train_loader,
@@ -82,7 +82,7 @@ def main():
         learner.model.load_state_dict(checkpoint["model_state_dict"])
         learner.optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
     elif config_args["model"]["resume"]:
-        LOGGER.info("Loading pretrained model from {}".format(config_args["model"]["resume"]))
+        LOGGER.info(f"Loading pretrained model from {config_args['model']['resume']}")
         if config_args["model"]["resume"] == "vgg16":
             learner.model.init_vgg16_params()
         else:
@@ -99,7 +99,7 @@ def main():
                 learner.load_checkpoint(pretrained_checkpoint["model_state_dict"], strict=False)
 
     # Log files
-    LOGGER.info("Using model {}".format(config_args["model"]["name"]))
+    LOGGER.info(f"Using model {config_args['model']['name']}")
     learner.model.print_summary(
         input_size=tuple([shape_i for shape_i in learner.train_loader.dataset[0][0].shape])
     )
@@ -115,7 +115,7 @@ def main():
             )
         )
     )
-    LOGGER.info("Saving logs in: {}".format(config_args["training"]["output_folder"]))
+    LOGGER.info(f"Saving logs in: {config_args['training']['output_folder']}")
 
     # Parallelize model
     nb_gpus = torch.cuda.device_count()

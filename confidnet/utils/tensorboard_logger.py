@@ -1,4 +1,9 @@
-# Code referenced from https://gist.github.com/gyglim/1f8dfb1b5c82627ae3efcfbbadb9f514
+"""Simple example on how to log scalars and images to tensorboard without tensor ops.
+License: BSD License 2.0
+https://gist.github.com/gyglim/1f8dfb1b5c82627ae3efcfbbadb9f514
+"""
+__author__ = "Michael Gygli"
+
 from io import BytesIO  # Python 3.x
 
 import numpy as np

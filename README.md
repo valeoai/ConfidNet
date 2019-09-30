@@ -101,3 +101,9 @@ Model weights for MNIST and CIFAR-10 datasets used in the paper are available al
 * train your model as indicated earlier
 
 
+## Acknowledgements
+* We thank [Thibaut Durand](http://www.sfu.ca/~tdurand/) for providing C++ implementation of ranking loss extracted from [MANTRA: Minimum Maximum Latent Structural SVM for Image Classification and Ranking](http://www.sfu.ca/~tdurand/projects/mantra/).
+* [@gyglim](https://gist.github.com/gyglim/1f8dfb1b5c82627ae3efcfbbadb9f514) for the implementation of Tensorboard in Pytorch
+* [@meetshah1995](https://github.com/meetshah1995/pytorch-semseg) for the implementation of segmentation augmentation in Pytorch
+* Special thanks for [@gabrieldemarmiesse](https://github.com/gabrieldemarmiesse) for his work in enhancing, cleaning and formatting this repository for release.
+

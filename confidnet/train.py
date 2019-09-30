@@ -1,6 +1,6 @@
 import argparse
 import os
-from shutil import copyfile
+from shutil import copyfile, rmtree
 
 import click
 import torch
@@ -46,7 +46,7 @@ def main():
                 ),
                 abort=True,
             ):
-                os.system("rm -r " + config_args["training"]["output_folder"])
+                rmtree(config_args["training"]["output_folder"])
             os.mkdir(config_args["training"]["output_folder"])
             start_epoch = 1
         else:

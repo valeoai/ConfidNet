@@ -1,5 +1,5 @@
 import argparse
-import os
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -42,7 +42,7 @@ def main():
     config_args = load_yaml(args.config_path)
 
     # Overwrite for release
-    config_args["training"]["output_folder"] = os.path.dirname(args.config_path)
+    config_args["training"]["output_folder"] = Path(args.config_path).parent
 
     config_args["training"]["metrics"] = [
         "accuracy",

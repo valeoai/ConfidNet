@@ -1,0 +1,43 @@
+# Data parameters
+data:
+    dataset: camvid
+    data_dir: /datasets_local/camvid/
+    input_size: [360, 480]
+    input_channels: 3
+    num_classes: 12
+    valid_size: 0.1
+
+# Training parameters
+training:
+    output_folder: /home/docker_user/shared/ccorbiere/logs/test/camvid_selfconfid
+    task: segmentation
+    learner: selfconfid
+    nb_epochs: 500
+    batch_size: 6
+    loss:
+        name: selfconfid_mse
+        weighting: 1
+    optimizer:
+        name: adam
+        lr: 0.0001
+        #momentum: 0.9
+        #weight_decay: 0.0001
+    lr_schedule:
+    ft_on_val: False
+    metrics: ['accuracy', 'auc', 'ap_success', 'accuracy_success', 'ap_errors', 'accuracy_errors']
+    pin_memory: False
+    num_workers: 1
+    augmentations:
+        hflip: True
+        #random_crop: [256,512]
+        normalize: [[0.411894, 0.425132, 0.432670], [0.274135, 0.285062, 0.282846]]
+
+# Model parameters
+model:
+    name: segnet_selfconfid
+    resume: /home/docker_user/shared/ccorbiere/logs/test/camvid_baseline_pretrained/model_epoch_012.ckpt
+    #uncertainty: /home/docker_user/shared/ccorbiere/logs/test/camvid_selfconfid/model_epoch_002.ckpt
+    is_deconv: True
+    is_batchnorm: True
+    is_dropout: True
+    feature_scale: 4

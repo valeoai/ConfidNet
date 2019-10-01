@@ -1,0 +1,40 @@
+# Data parameters
+data:
+    dataset: cifar10
+    data_dir: data/cifar10-data
+    input_size: [32,32]
+    input_channels: 3
+    num_classes: 10
+    valid_size: 0.1
+
+# Training parameters
+training:
+    output_folder: /home/docker_user/shared/ccorbiere/logs/test/cifar10_selfconfid
+    task: classification
+    learner: selfconfid
+    nb_epochs: 500
+    batch_size: 128
+    loss:
+        name: selfconfid_mse
+        weighting: 1
+    optimizer:
+        name: adam
+        lr: 0.0001
+        #momentum: 0.9
+        #weight_decay: 0.0001
+    lr_schedule:
+    ft_on_val: False
+    metrics: ['accuracy', 'auc', 'ap_success', 'ap_errors']
+    pin_memory: False
+    num_workers: 3
+    augmentations:
+        hflip: True
+        rotate: 15
+        #rcrop: 32
+        normalize: [[0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]]
+
+# Model parameters
+model:
+    name: vgg16_selfconfid_classic
+    resume: /home/docker_user/shared/ccorbiere/cifar10_pretrained/baseline/model_epoch_197.ckpt
+    #uncertainty: /home/docker_user/shared/ccorbiere/logs/test/cifar10_selfconfid/model_epoch_005.ckpt

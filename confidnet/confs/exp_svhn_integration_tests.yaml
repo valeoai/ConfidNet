@@ -1,0 +1,37 @@
+# Data parameters
+data:
+    dataset: svhn
+    data_dir: /svhn-data
+    input_size: [32,32]
+    input_channels: 3
+    num_classes: 10
+    valid_size: 0.1
+
+# Training parameters
+training:
+    output_folder: /output_dir
+    task: classification
+    learner: default
+    nb_epochs: 1
+    batch_size: 128
+    loss:
+        name: cross_entropy
+    optimizer:
+        name: sgd
+        lr: 0.001
+        momentum: 0.9
+        weight_decay: 0.0001
+    lr_schedule:
+    smoother: 0.1
+    metrics: ['accuracy', 'auc', 'ap_success', 'ap_errors']
+    pin_memory: False
+    num_workers: 3
+    augmentations:
+        #hflip: True
+        normalize: [[0.5, 0.5, 0.5], [0.5, 0.5, 0.5]]
+
+# Model parameters
+model:
+    name: small_convnet_svhn
+    resume:
+    feature_dim: 512

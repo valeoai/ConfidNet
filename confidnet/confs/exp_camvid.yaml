@@ -1,0 +1,48 @@
+# Data parameters
+data:
+    dataset: camvid
+    data_dir: /datasets_local/camvid/
+    input_size: [360, 480]
+    input_channels: 3
+    num_classes: 12
+    valid_size: 0.1
+
+# Training parameters
+training:
+    output_folder: /home/docker_user/shared/ccorbiere/logs/test/camvid_baseline_pretrained
+    task: segmentation
+    learner: default
+    nb_epochs: 500
+    batch_size: 8
+    loss:
+        name: cross_entropy
+    optimizer:
+        name: adam
+        lr: 0.001
+        #momentum: 0.9
+        #weight_decay: 0.0001
+    lr_schedule:
+        #name: multi_step
+        #milestones: [30, 80]
+    smoother: 0.1
+    metrics: ['accuracy', 'mean_iou']
+    pin_memory: False
+    num_workers: 8
+    augmentations:
+        #color_jitter: [0.4, 0.4, 0.4, 0]
+        #resize: 512
+        #rotate: 10
+        hflip: True
+        #random_crop: [256,512]
+        normalize: [[0.411894, 0.425132, 0.432670], [0.274135, 0.285062, 0.282846]]
+
+
+# Model parameters
+model:
+    name: segnet
+    resume: vgg16
+    is_deconv: True
+    is_batchnorm: True
+    is_dropout: True
+    feature_scale: 4
+

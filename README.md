@@ -1,10 +1,10 @@
-# Addressing Failure Prediction by Learning Model Confidence
+# [Addressing Failure Prediction by Learning Model Confidence](https://arxiv.org/abs/1910.04851)
  [Charles Corbière](https://chcorbi.github.io/),  [Nicolas Thome](http://cedric.cnam.fr/~thomen/), [Avner Bar-Hen](https://ab-h.github.io/), [Matthieu Cord](http://webia.lip6.fr/~cord/), [Patrick Pérez](https://ptrckprz.github.io/) \
 *International Conference on Neural Information Processing Systems (NeurIPS), 2019*
 
 ![](./teaser.png)
 
-If you find this code useful for your research, please cite our paper:
+If you find this code useful for your research, please cite our [paper](https://arxiv.org/abs/1910.04851):
 
 ```
 @inproceedings{corbiere2019ConfidNet,

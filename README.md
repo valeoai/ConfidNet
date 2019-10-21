@@ -9,7 +9,7 @@ If you find this code useful for your research, please cite our [paper](https://
 ```
 @inproceedings{corbiere2019ConfidNet,
   title={Addressing Failure Prediction by Learning Model Confidence},
-  author={Corbi{\'e}re, Charles and Thome, Nicolas and Bar-Hen, Avner and Cord, Mathieu and P{\'e}rez, Patrick},
+  author={Corbi{\`e}re, Charles and Thome, Nicolas and Bar-Hen, Avner and Cord, Mathieu and P{\'e}rez, Patrick},
   booktitle={NeurIPS},
   year={2019}
 }

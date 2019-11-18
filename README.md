@@ -1,17 +1,21 @@
-# [Addressing Failure Prediction by Learning Model Confidence](https://arxiv.org/abs/1910.04851)
+# Addressing Failure Prediction by Learning Model Confidence
  [Charles Corbière](https://chcorbi.github.io/),  [Nicolas Thome](http://cedric.cnam.fr/~thomen/), [Avner Bar-Hen](https://ab-h.github.io/), [Matthieu Cord](http://webia.lip6.fr/~cord/), [Patrick Pérez](https://ptrckprz.github.io/) \
 *International Conference on Neural Information Processing Systems (NeurIPS), 2019*
 
 ![](./teaser.png)
 
-If you find this code useful for your research, please cite our [paper](https://arxiv.org/abs/1910.04851):
+If you find this code useful for your research, please cite our [paper](https://papers.nips.cc/paper/8556-addressing-failure-detection-by-learning-model-confidence):
 
 ```
-@inproceedings{corbiere2019ConfidNet,
-  title={Addressing Failure Prediction by Learning Model Confidence},
-  author={Corbi{\`e}re, Charles and Thome, Nicolas and Bar-Hen, Avner and Cord, Mathieu and P{\'e}rez, Patrick},
-  booktitle={NeurIPS},
-  year={2019}
+@incollection{NIPS2019_8556,
+    title = {Addressing Failure Detection by Learning Model Confidence},
+    author = {Corbi\`{e}re, Charles and THOME, Nicolas and Bar-Hen, Avner and Cord, Matthieu and P\'{e}rez, Patrick},
+    booktitle = {Advances in Neural Information Processing Systems 32},
+    editor = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc and E. Fox and R. Garnett},
+    pages = {2898--2909},
+    year = {2019},
+    publisher = {Curran Associates, Inc.},
+    url = {http://papers.nips.cc/paper/8556-addressing-failure-detection-by-learning-model-confidence.pdf}
 }
 ```
 

@@ -48,7 +48,7 @@ You can take a look at the [Dockerfile](./Dockerfile) if you are uncertain about
 
 MNIST, SVHN, CIFAR-10 and CIFAR-100 datasets are managed by Pytorch dataloader. First time you run a script, the dataloader will download the dataset in ```confidnet/data/DATASETNAME-data```.
 
-CamVid dataset need to be download beforehand (available [here](http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamSeq01/)) and the structure must follow:
+CamVid dataset need to be download beforehand (available [here](https://github.com/alexgkendall/SegNet-Tutorial/tree/master/CamVid)) and the structure must follow:
 ```bash
 <data_dir>/train/                       % Train images folder
 <data_dir>/trainannot/                  % Train labels folder

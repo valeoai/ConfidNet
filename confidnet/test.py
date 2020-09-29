@@ -15,7 +15,7 @@ from confidnet.utils.misc import load_yaml
 
 LOGGER = get_logger(__name__, level="DEBUG")
 
-MODE_TYPE = ["normal", "gt", "mc_dropout", "trust_score", "confidnet"]
+MODE_TYPE = ["mcp", "tcp", "mc_dropout", "trust_score", "confidnet"]
 MAX_NUMBER_TRUSTSCORE_SEG = 3000
 
 
@@ -27,7 +27,7 @@ def main():
         "--mode",
         "-m",
         type=str,
-        default="normal",
+        default="mcp",
         choices=MODE_TYPE,
         help="Type of confidence testing",
     )

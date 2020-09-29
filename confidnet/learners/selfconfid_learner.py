@@ -81,6 +81,10 @@ class SelfConfidLearner(AbstractLeaner):
         logs_dict = OrderedDict(
             {
                 "epoch": {"value": epoch, "string": f"{epoch:03}"},
+                "lr": {
+                    "value": self.optimizer.param_groups[0]["lr"],
+                    "string": f"{self.optimizer.param_groups[0]['lr']:05.1e}",
+                },
                 "train/loss_confid": {
                     "value": loss / len_data,
                     "string": f"{(loss / len_data):05.4e}",
@@ -119,6 +123,10 @@ class SelfConfidLearner(AbstractLeaner):
 
         # Tensorboard logging
         self.save_tb(logs_dict)
+
+        # Scheduler step
+        if self.scheduler:
+            self.scheduler.step()
 
     def evaluate(self, dloader, len_dataset, split="test", verbose=False, **args):
         self.model.eval()

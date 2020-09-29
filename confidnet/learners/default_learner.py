@@ -1,6 +1,4 @@
-import os
 from collections import OrderedDict
-
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -130,7 +128,7 @@ class DefaultLearner(AbstractLeaner):
             data, target = data.to(self.device), target.to(self.device)
 
             with torch.no_grad():
-                if mode == "normal":
+                if mode == "mcp":
                     output = self.model(data)
                     if self.task == "classification":
                         loss += self.criterion(output, target)
@@ -138,7 +136,7 @@ class DefaultLearner(AbstractLeaner):
                         loss += self.criterion(output, target.squeeze(dim=1))
                     confidence, pred = F.softmax(output, dim=1).max(dim=1, keepdim=True)
 
-                elif mode == "gt":
+                elif mode == "tcp":
                     output = self.model(data)
                     if self.task == "classification":
                         loss += self.criterion(output, target)

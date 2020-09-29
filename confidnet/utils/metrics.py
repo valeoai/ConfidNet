@@ -1,6 +1,5 @@
 import numpy as np
-from sklearn.metrics import average_precision_score
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import average_precision_score, roc_auc_score, auc
 
 
 def _fast_hist(label_true, label_pred, n_class):
@@ -48,10 +47,10 @@ class Metrics:
             scores[f"{split}/accuracy"] = {"value": accuracy, "string": f"{accuracy:05.2%}"}
         if "auc" in self.metrics:
             if len(np.unique(self.accurate)) == 1:
-                auc = 1
+                auc_score = 1
             else:
-                auc = roc_auc_score(self.accurate, self.proba_pred)
-            scores[f"{split}/auc"] = {"value": auc, "string": f"{auc:05.2%}"}
+                auc_score = roc_auc_score(self.accurate, self.proba_pred)
+            scores[f"{split}/auc"] = {"value": auc_score, "string": f"{auc_score:05.2%}"}
         if "ap_success" in self.metrics:
             ap_success = average_precision_score(self.accurate, self.proba_pred)
             scores[f"{split}/ap_success"] = {"value": ap_success, "string": f"{ap_success:05.2%}"}
@@ -99,5 +98,14 @@ class Metrics:
             )
             mean_iou = np.nanmean(iou)
             scores[f"{split}/mean_iou"] = {"value": mean_iou, "string": f"{mean_iou:05.2%}"}
-
+        if "aurc" in self.metrics:
+            risks, coverages = [], []
+            for delta in sorted(set(self.proba_pred))[:-1]:
+                coverages.append((self.proba_pred > delta).mean())
+                selected_accurate = self.accurate[self.proba_pred > delta]
+                risks.append(1. - selected_accurate.mean())
+            aurc = auc(coverages, risks)
+            eaurc = aurc - ((1. - accuracy) + accuracy*np.log(accuracy))
+            scores[f"{split}/aurc"] = {"value": aurc, "string": f"{aurc*1000:01.2f}"}
+            scores[f"{split}/e-aurc"] = {"value": aurc, "string": f"{eaurc*1000:01.2f}"}
         return scores

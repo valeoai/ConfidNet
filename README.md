@@ -17,7 +17,6 @@ If you find this code useful for your research, please cite our [paper](https://
    publisher = {Curran Associates, Inc.},
    url = {http://papers.nips.cc/paper/8556-addressing-failure-prediction-by-learning-model-confidence.pdf}
 }
-
 ```
 
 ## Abstract

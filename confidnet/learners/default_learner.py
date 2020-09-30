@@ -149,7 +149,7 @@ class DefaultLearner(AbstractLeaner):
                     ).to(self.device)
                     # Segmentation special case
                     if self.task == "segmentation":
-                        labels_hot = labels_hot.permute(0, 3, 1, 2)
+                        labels_hot = labels_hot.squeeze(1).permute(0, 3, 1, 2)
                     confidence, _ = (labels_hot * probs).max(dim=1, keepdim=True)
 
                 elif mode == "mc_dropout":

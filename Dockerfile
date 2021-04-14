@@ -7,8 +7,8 @@ RUN bash miniconda.sh -b -p /opt/conda && \
 ENV PATH="/opt/conda/bin:${PATH}"
 RUN conda config --set always_yes yes
 
-RUN conda install pytorch torchvision cudatoolkit=10.0 -c pytorch
-RUN pip install tensorflow torchsummary pyyaml verboselogs coloredlogs click scikit-learn
+RUN conda install pytorch==1.1.0 torchvision==0.3 cudatoolkit=10.0 -c pytorch
+RUN pip install tensorflow==1.13.1 torchsummary pyyaml verboselogs coloredlogs click scikit-learn
 
 COPY ./ ./ConfidNet
 RUN pip install -e ./ConfidNet

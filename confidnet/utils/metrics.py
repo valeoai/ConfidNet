@@ -107,5 +107,5 @@ class Metrics:
             aurc = auc(coverages, risks)
             eaurc = aurc - ((1. - accuracy) + accuracy*np.log(accuracy))
             scores[f"{split}/aurc"] = {"value": aurc, "string": f"{aurc*1000:01.2f}"}
-            scores[f"{split}/e-aurc"] = {"value": aurc, "string": f"{eaurc*1000:01.2f}"}
+            scores[f"{split}/e-aurc"] = {"value": eaurc, "string": f"{eaurc*1000:01.2f}"}
         return scores

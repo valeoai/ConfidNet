@@ -111,7 +111,7 @@ class DefaultLearner(AbstractLeaner):
             self.scheduler.step()
 
     def evaluate(
-        self, dloader, len_dataset, split="test", mode="normal", samples=50, verbose=False
+        self, dloader, len_dataset, split="test", mode="mcp", samples=50, verbose=False
     ):
         self.model.eval()
         metrics = Metrics(self.metrics, len_dataset, self.num_classes)
